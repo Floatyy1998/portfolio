@@ -1,9 +1,10 @@
 import { Box, IconButton, Stack } from "@mui/material";
 import PsychologyIcon from "@mui/icons-material/Psychology";
 import CodeIcon from "@mui/icons-material/Code";
-import MessageIcon from "@mui/icons-material/Message";
-import { Avatar } from "@mui/material";
-import killua from "../assets/killua.jpg";
+import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 
 interface NavProps {
   active: number;
@@ -13,53 +14,61 @@ const Nav = ({ active }: NavProps) => {
   const iconButtons = [
     {
       icon: (
-        <Avatar
-          alt="Konrad"
-          src={killua}
-          style={{ width: "45px", height: "45px" }}
-        />
+        <HomeOutlinedIcon style={{ width: "45px", height: "45px" }} />
       ),
       style: {
         height: "65px",
         width: "65px",
-        border: active === 1 ? "2px solid cyan" : "none",
-        color: active === 1 ? "cyan" : "white",
+        border: active === 1 ? "2px solid #00fed7" : "none",
+        color: active === 1 ? "#00fed7" : "white",
       },
       onClick: () =>
         document.getElementById("1")?.scrollIntoView({ behavior: "smooth" }),
-    },
-    {
-      icon: <PsychologyIcon style={{ width: "45px", height: "45px" }} />,
+    },{
+      icon: (
+        <PersonOutlineOutlinedIcon style={{ width: "45px", height: "45px" }} />
+      ),
       style: {
         height: "65px",
         width: "65px",
-        border: active === 2 ? "2px solid cyan" : "none",
-        color: active === 2 ? "cyan" : "white",
+        border: active === 2 ? "2px solid #00fed7" : "none",
+        color: active === 2 ? "#00fed7" : "white",
       },
       onClick: () =>
         document.getElementById("2")?.scrollIntoView({ behavior: "smooth" }),
+    },
+    {
+      icon: <WorkOutlineIcon  style={{ width: "45px", height: "45px" }} />,
+      style: {
+        height: "65px",
+        width: "65px",
+        border: active === 3 ? "2px solid #00fed7" : "none",
+        color: active === 3 ? "#00fed7" : "white",
+      },
+      onClick: () =>
+        document.getElementById("3")?.scrollIntoView({ behavior: "smooth" }),
     },
     {
       icon: <CodeIcon style={{ width: "45px", height: "45px" }} />,
       style: {
         height: "65px",
         width: "65px",
-        border: active === 3 ? "2px solid cyan" : "none",
-        color: active === 3 ? "cyan" : "white",
-      },
-      onClick: () =>
-        document.getElementById("3")?.scrollIntoView({ behavior: "smooth" }),
-    },
-    {
-      icon: <MessageIcon style={{ width: "35px", height: "35px" }} />,
-      style: {
-        height: "65px",
-        width: "65px",
-        border: active === 4 ? "2px solid cyan" : "none",
-        color: active === 4 ? "cyan" : "white",
+        border: active === 4 ? "2px solid #00fed7" : "none",
+        color: active === 4 ? "#00fed7" : "white",
       },
       onClick: () =>
         document.getElementById("4")?.scrollIntoView({ behavior: "smooth" }),
+    },
+    {
+      icon: <MessageOutlinedIcon style={{ width: "35px", height: "35px" }} />,
+      style: {
+        height: "65px",
+        width: "65px",
+        border: active === 5 ? "2px solid #00fed7" : "none",
+        color: active === 5 ? "#00fed7" : "white",
+      },
+      onClick: () =>
+        document.getElementById("5")?.scrollIntoView({ behavior: "smooth" }),
     },
   ];
 
@@ -70,15 +79,16 @@ const Nav = ({ active }: NavProps) => {
         height: "80px",
         position: "absolute",
         bottom: "16px",
+        zIndex: 1000,
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "end",
       }}
     >
       <Box
         sx={{
           width: "400px",
-          margin: "auto",
-          background: "rgba(0,0,0,0.9)",
+          margin: "0 auto",
+          background: "rgba(0,0,0,0.5)",
           height: "100%",
           borderRadius: "50px",
           display: "flex",

@@ -1,0 +1,59 @@
+.home-container {
+  color: azure;
+  
+  width: 100% !important;
+  height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+  height: fit-content !important;
+  text-align: center;
+  border-radius: 30px;
+    margin-top: auto;
+  align-items: center;
+    justify-content: center;
+ 
+  position:absolute;
+  max-height: -webkit-fill-available;
+  scroll-snap-type: y mandatory;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+  overflow-y: scroll;
+  font-size: calc(3vh + 1vw);
+}
+
+.Typewriter {
+  color: #8cfae9;
+}
+.Typewriter__wrapper {
+  background: -webkit-linear-gradient(#00fed7, #8cfae9);
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+.name {
+  background: -webkit-linear-gradient(#00fed7, #8cfae9);
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+@media only screen and (max-width: 950px) {
+  .home-container {
+    width: 98% !important;
+    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    height: fit-content !important;
+
+    border-radius: 30px;
+    margin: auto;
+    
+    max-height: -webkit-fill-available;
+    scroll-snap-type: y mandatory;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+    overflow-y: scroll;
+  }
+}

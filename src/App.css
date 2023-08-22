@@ -2,17 +2,20 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
 }
 body {
-  
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
 ::-webkit-scrollbar {
   display: none;
 }
-#tsparticles{
+#tsparticles {
   position: fixed;
   z-index: -1;
+
+}
+canvas{
+  background: rgb(2,0,36);
+background: linear-gradient(140deg, rgb(47, 102, 105) 0%, rgb(65, 142, 146) 50%, rgba(0,212,255,1) 100%);
 }

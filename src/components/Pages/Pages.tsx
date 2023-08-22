@@ -1,9 +1,14 @@
 import React, { useEffect, useRef } from "react";
-import "../Styles/Pages.css";
+import "./Pages.css";
 import { InView } from "react-intersection-observer";
 
-import Nav from "./Nav";
-import InfoButton from "./InfoButton";
+import Nav from "../Nav/Nav";
+import InfoButton from "../InfoButton/InfoButton";
+import Home from "../Home/Home";
+import AboutMe from "../AboutMe/AboutMe";
+import Experiences from "../Experiences/Experiences";
+import Projects from "../Projects/Projects";
+import Contact from "../Contact/Contact";
 
 const Pages = () => {
   const [page, setPage] = React.useState(1);
@@ -20,38 +25,51 @@ const Pages = () => {
       <Nav active={page} />
 
       <InfoButton />
-      <div className="container">
+      <div className="container ">
         <InView
+          className="stop home"
           id="1"
           as="div"
-          threshold={1}
+          threshold={0.7}
           onChange={(inView, entry) => handleInView(inView, entry)}
         >
-          <div>{`1`}</div>
+          <Home />
         </InView>
         <InView
+          className="stop"
           id="2"
           as="div"
-          threshold={1}
+          threshold={0.7}
           onChange={(inView, entry) => handleInView(inView, entry)}
         >
-          <div>{`2`}</div>
+          <AboutMe/>
         </InView>
         <InView
+          className="stop"
           id="3"
           as="div"
-          threshold={1}
+          threshold={0.7}
           onChange={(inView, entry) => handleInView(inView, entry)}
         >
-          <div>{`3`}</div>
+          <Experiences/>
         </InView>
         <InView
+          className="stop"
           id="4"
           as="div"
-          threshold={1}
+          threshold={0.7}
           onChange={(inView, entry) => handleInView(inView, entry)}
         >
-          <div>{`4`}</div>
+          <Projects/>
+        </InView>
+        <InView
+          className="stop"
+          id="5"
+          as="div"
+          threshold={0.7}
+          onChange={(inView, entry) => handleInView(inView, entry)}
+        >
+          <Contact/>
         </InView>
       </div>
     </>
