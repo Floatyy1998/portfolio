@@ -4,28 +4,32 @@ import SpeedDialAction from "@mui/material/SpeedDialAction";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
-import "./InfoButton.css"
+import "./InfoButton.css";
 
 const InfoButton = () => {
   const actions = [
-    { icon: <LinkedInIcon />, name: "LinkedIn" },
-    { icon: <GitHubIcon />, name: "Github" },
-    { icon: <ArticleOutlinedIcon/>, name: "CV" },
+    { icon: <LinkedInIcon />, name: "LinkedIn", onclick: () => {} },
+    {
+      icon: <GitHubIcon />,
+      name: "Github",
+      onclick: () => {
+        window.open("https://www.github.com/Floatyy1998", "_blank")?.focus();
+      },
+    },
+    { icon: <ArticleOutlinedIcon />, name: "CV", onclick: () => {} },
   ];
   return (
     <SpeedDial
       ariaLabel="SpeedDial basic example"
       direction="left"
-      
-    
-      icon={<InfoOutlinedIcon style={{ width: "40px", height: "40px",  }} />}
+      icon={<InfoOutlinedIcon style={{ width: "40px", height: "40px" }} />}
     >
       {actions.map((action) => (
         <SpeedDialAction
-       
           key={action.name}
           icon={action.icon}
           tooltipTitle={action.name}
+          onClick={action.onclick}
         />
       ))}
     </SpeedDial>

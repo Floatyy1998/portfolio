@@ -2,10 +2,18 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: azure;
+}
+html {
+  scroll-behavior: smooth;
+  background: rgba(0, 0, 0, 0.9);
+  
 }
 body {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+  
+ 
 }
 ::-webkit-scrollbar {
   display: none;
@@ -16,6 +24,6 @@ body {
 
 }
 canvas{
-  background: rgb(2,0,36);
+  
 background: linear-gradient(140deg, rgb(47, 102, 105) 0%, rgb(65, 142, 146) 50%, rgba(0,212,255,1) 100%);
 }

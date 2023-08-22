@@ -1,10 +1,50 @@
 .experiences-container {
-    text-align: center;
+  text-align: center;
+  position: relative;
+  top: 80px;
+  width: 80%;
+  height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+  height: calc((var(--vh, 1vh) * 100) - 200px);
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 30px;
+  margin: auto;
+  max-height: -webkit-fill-available;
+  scroll-snap-type: y mandatory;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+  overflow-y: scroll;
+}
+.MuiTabs-flexContainer {
+  justify-content: space-evenly;
+}
+.MuiTab-textColorPrimary {
+  color: azure !important;
+  font-size: 1.2rem !important;
+}
+.MuiTabs-indicator {
+  background: -webkit-linear-gradient(#00fed7, #8cfae9) !important;
+  -webkit-background-clip: text ;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+.Mui-selected {
+  background: -webkit-linear-gradient(#00fed7, #8cfae9);
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+@media only screen and (max-width: 950px) {
+  .experiences-container {
     position: relative;
-    top: 80px;
+    top: 110px;
     width: 98%;
     height: 100vh; /* Fallback for browsers that do not support Custom Properties */
-    height: calc((var(--vh, 1vh) * 100) - 200px);
+    height: calc((var(--vh, 1vh) * 100) - 310px);
     background: rgba(0, 0, 0, 0.3);
     border-radius: 30px;
     margin: auto;
@@ -16,23 +56,4 @@
     /* Firefox */
     overflow-y: scroll;
   }
-  
-  @media only screen and (max-width: 950px) {
-    .experiences-container {
-      position: relative;
-      top: 110px;
-      height: 100vh; /* Fallback for browsers that do not support Custom Properties */
-      height: calc((var(--vh, 1vh) * 100) - 310px );
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 30px;
-      margin: auto;
-      max-height: -webkit-fill-available;
-      scroll-snap-type: y mandatory;
-      -ms-overflow-style: none;
-      /* IE and Edge */
-      scrollbar-width: none;
-      /* Firefox */
-      overflow-y: scroll;
-    }
-  }
-  
+}

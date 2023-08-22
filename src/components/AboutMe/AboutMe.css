@@ -2,13 +2,14 @@
   text-align: center;
   position: relative;
   top: 80px;
-  width: 98%;
+  width: 80%;
   height: 100vh; /* Fallback for browsers that do not support Custom Properties */
   height: calc((var(--vh, 1vh) * 100) - 200px);
   background: rgba(0, 0, 0, 0.3);
   border-radius: 30px;
   margin: auto;
- 
+ display: flex;
+  flex-direction: row;
   scroll-snap-type: y mandatory;
   -ms-overflow-style: none;
   /* IE and Edge */
@@ -17,10 +18,29 @@
   overflow-y: scroll;
 }
 
+.color{
+  background: -webkit-linear-gradient(#00fed7, #8cfae9);
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+
 @media only screen and (max-width: 950px) {
+  #sphere {
+    display: none;
+  }
+
+  #aboutme{
+    font-size: 1.5rem !important;
+    width: 100% !important;
+  }
+
   .aboutme-container {
     position: relative;
     top: 110px;
+    width: 98%;
     height: 100vh; /* Fallback for browsers that do not support Custom Properties */
     height: calc((var(--vh, 1vh) * 100) - 310px );
     background: rgba(0, 0, 0, 0.3);

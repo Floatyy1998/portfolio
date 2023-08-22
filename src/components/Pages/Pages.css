@@ -13,7 +13,7 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
   overflow-y: scroll;
-  background: rgba(0, 0, 0, 0.3);
+  
 }
 
 .container .stop {

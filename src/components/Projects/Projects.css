@@ -2,7 +2,7 @@
     text-align: center;
     position: relative;
     top: 80px;
-    width: 98%;
+    width: 80%;
     height: 100vh; /* Fallback for browsers that do not support Custom Properties */
     height: calc((var(--vh, 1vh) * 100) - 200px);
     background: rgba(0, 0, 0, 0.3);
@@ -21,6 +21,7 @@
     .projects-container {
       position: relative;
       top: 110px;
+      width: 98%;
       height: 100vh; /* Fallback for browsers that do not support Custom Properties */
       height: calc((var(--vh, 1vh) * 100) - 310px );
       background: rgba(0, 0, 0, 0.3);
