@@ -8,7 +8,7 @@
   background: rgba(0, 0, 0, 0.3);
   border-radius: 30px;
   margin: auto;
-  max-height: -webkit-fill-available;
+  max-height: calc(100vh - 200px);
   scroll-snap-type: y mandatory;
   -ms-overflow-style: none;
   /* IE and Edge */
@@ -25,7 +25,7 @@
 }
 .MuiTabs-indicator {
   background: -webkit-linear-gradient(#00fed7, #8cfae9) !important;
-  -webkit-background-clip: text ;
+  -webkit-background-clip: text;
   background-clip: text;
 
   -webkit-text-fill-color: transparent;
@@ -38,22 +38,118 @@
   -webkit-text-fill-color: transparent;
 }
 
+.tab-panel {
+  height: calc((var(--vh, 1vh) * 100) - 250px);
+}
+.header {
+  width: 100%;
+  height: 7.5%;
+  display: flex;
+  font-size: calc(1vh + 1vw);
+  align-items: center;
+  justify-content: center;
+}
+.link {
+  color: #62efff;
+  cursor: pointer;
+  position: relative;
+  transition: background-size 0.2s ease;
+  background-size: 0% 0.1em;
+  text-decoration: none;
+  background-image: linear-gradient(#00fed7, #8cfae9);
+  background-repeat: no-repeat;
+  background-position-x: 0%;
+  background-position-y: 100%;
+}
+.date {
+  color: rgba(190, 190, 190, 0.7);
+  width: 100%;
+  display: flex;
+  font-size: calc(0.6vh + 0.6vw);
+  align-items: center;
+  margin-bottom: 40px;
+  flex-direction: column;
+}
+.date div {
+  color: rgba(190, 190, 190, 0.7);
+}
+.ul {
+  width: 90%;
+  text-align: left;
+  margin: auto;
+  color: rgba(240, 240, 240, 0.8);
+  font-size: calc(0.7vh + 0.5vw) !important;
+  list-style: none;
+  display: block;
+  margin: auto;
+
+  list-style: none;
+}
+.li {
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 20px;
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+.li::before {
+  top: -2px;
+  left: 0;
+  color: #00fed7;
+  content: "▹";
+  display: inline-block;
+  position: absolute;
+  font-weight: bold;
+  vertical-align: middle;
+}
+.tab-panel-content {
+  width: 40%;
+  height: 100%;
+  border: 1px solid #00fed7;
+  border-radius: 20px
+}
+
 @media only screen and (max-width: 950px) {
   .experiences-container {
     position: relative;
     top: 110px;
     width: 98%;
-    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
-    height: calc((var(--vh, 1vh) * 100) - 310px);
+    /* Fallback for browsers that do not support Custom Properties */
+    height: calc((var(--vh, 1vh) * 100) - 300px);
     background: rgba(0, 0, 0, 0.3);
     border-radius: 30px;
     margin: auto;
-    max-height: -webkit-fill-available;
+    max-height: calc(100vh - 330px);
     scroll-snap-type: y mandatory;
     -ms-overflow-style: none;
     /* IE and Edge */
     scrollbar-width: none;
     /* Firefox */
     overflow-y: scroll;
+  }
+  .tab-panel {
+    height: calc((var(--vh, 1vh) * 100) - 380px);
+  }
+  .tab-panel-content {
+    width: 90% !important;
+    padding-top: 10px;
+    height: 100%;
+    border: 1px solid #00fed7;
+    border-radius: 20px
+  }
+  .ul {
+    
+    font-size: calc(1vh + 2vw) !important;
+   
+  }
+  .date div {
+    font-size: calc(1.5vh + 1vw) !important;
+    margin-top: 10px;
+  }
+  .header {
+   
+    font-size: calc(2vh + 1.5vw);
+    align-items: center;
+    justify-content: center;
   }
 }

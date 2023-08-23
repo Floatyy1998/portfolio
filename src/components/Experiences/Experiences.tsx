@@ -15,13 +15,34 @@ function CustomTabPanel(props: TabPanelProps) {
 
   return (
     <div
+      className="tab-panel"
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      {value === index && (
+        <Box
+          sx={{
+            p: 3,
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <div className="tab-panel-content"
+            style={{
+              width: "40%",
+              height: "100%",
+              border: "1px solid #00fed7",
+              borderRadius: "20px",
+            }}
+          >
+            {children}
+          </div>
+        </Box>
+      )}
     </div>
   );
 }
@@ -50,7 +71,34 @@ const Experiences = () => {
           <Tab label="HUK-Coburg" {...a11yProps(2)} />
         </Tabs>
         <CustomTabPanel value={value} index={0}>
-          Item One
+          <div className="header">
+            IT Internship
+            <span style={{ color: "#62efff", marginLeft: "5px" }}>
+              <a
+                className="link"
+                href="https://habafamilygroup.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                @Haba
+              </a>
+            </span>
+          </div>
+          <div className="date">
+            <div>Oct 2013</div>
+          </div>
+          <ul className="ul">
+            <li className="li">
+              <b>Type:</b> Internship
+            </li>
+            <li className="li">
+              Learned basic programming principles and algorithms with Java
+            </li>
+            <li className="li">
+              Gained first insights into the everyday professional life of a
+              software developer
+            </li>
+          </ul>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
           Item Two

@@ -8,14 +8,20 @@
   background: rgba(0, 0, 0, 0.3);
   border-radius: 30px;
   margin: auto;
- display: flex;
-  flex-direction: row;
+  max-height: calc(100vh - 200px);
   scroll-snap-type: y mandatory;
   -ms-overflow-style: none;
   /* IE and Edge */
   scrollbar-width: none;
   /* Firefox */
   overflow-y: scroll;
+}
+#aboutme{
+  font-size: calc(1vh + 1vw);
+
+  font-weight: 700;
+
+
 }
 
 .color{
@@ -33,7 +39,7 @@
   }
 
   #aboutme{
-    font-size: 1.5rem !important;
+    font-size: calc(1vh + 3vw);
     width: 100% !important;
   }
 
@@ -41,12 +47,12 @@
     position: relative;
     top: 110px;
     width: 98%;
-    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
-    height: calc((var(--vh, 1vh) * 100) - 310px );
+    /* Fallback for browsers that do not support Custom Properties */
+    height: calc((var(--vh, 1vh) * 100) - 300px);
     background: rgba(0, 0, 0, 0.3);
     border-radius: 30px;
     margin: auto;
-    
+    max-height: calc(100vh - 330px);
     scroll-snap-type: y mandatory;
     -ms-overflow-style: none;
     /* IE and Edge */

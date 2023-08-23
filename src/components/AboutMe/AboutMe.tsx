@@ -38,7 +38,7 @@ const AboutMe = () => {
             display: "flex",
             alignItems: "center",
             padding: "20px",
-            fontSize: "1.8rem",
+            
             textAlign: "left",
           }}
         >

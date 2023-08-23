@@ -87,6 +87,7 @@ const Nav = ({ active }: NavProps) => {
       <Box
         sx={{
           width: "400px",
+          maxWidth: "95%",
           margin: "0 auto",
           background: "rgba(0,0,0,0.5)",
           height: "100%",
