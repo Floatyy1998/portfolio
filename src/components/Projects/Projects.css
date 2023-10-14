@@ -59,7 +59,10 @@
   margin: 0 !important;
 }
 .MuiButton-textPrimary {
-  color: rgba(0, 212, 255, 1) !important;
+  background: -webkit-linear-gradient(#00fed7, #8cfae9) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: #00fed7 !important;
 }
 
 @media only screen and (max-width: 950px) {
