@@ -31,9 +31,10 @@ function CustomTabPanel(props: TabPanelProps) {
             justifyContent: "center",
           }}
         >
-          <div className="tab-panel-content"
+          <div
+            className="tab-panel-content"
             style={{
-              width: "40%",
+              width: "80%",
               height: "100%",
               border: "1px solid #00fed7",
               borderRadius: "20px",
@@ -58,7 +59,7 @@ const Experiences = () => {
     setValue(newValue);
   };
   return (
-    <>
+    <div style={{width:"100%"}}>
       <Title title={"Experiences"} />
       <div className="experiences-container">
         <Tabs
@@ -101,13 +102,76 @@ const Experiences = () => {
           </ul>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          Item Two
+          <div className="header">
+            IT Internship
+            <span style={{ color: "#62efff", marginLeft: "5px" }}>
+              <a
+                className="link"
+                href="https://www.kapp-niles.com/de/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                @KAPP NILES
+              </a>
+            </span>
+          </div>
+          <div className="date">
+            <div>Apr 2020 - Jun 2020</div>
+          </div>
+          <ul className="ul">
+            <li className="li">
+              <b>Type:</b> Internship
+            </li>
+            <li className="li">
+              My scope was to program a web frontend for a commissioning
+              overview.
+            </li>
+            <li className="li">Tools I used:</li>
+            <ul className="ul2">
+              <li className="li">HTML</li>
+              <li className="li">CSS</li>
+              <li className="li">JavaScript</li>
+              <li className="li">MongoDB</li>
+            </ul>
+          </ul>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
-          Item Three
+          <div className="header">
+            IT Internship
+            <span style={{ color: "#62efff", marginLeft: "5px" }}>
+              <a
+                className="link"
+                href="https://www.huk.de"
+                target="_blank"
+                rel="noreferrer"
+              >
+                @HUK-COBURG
+              </a>
+            </span>
+          </div>
+          <div className="date">
+            <div>Sep 2022 - Now</div>
+          </div>
+          <ul className="ul">
+            <li className="li">
+              <b>Type:</b> Apprenticeship
+            </li>
+            <li className="li">Assignments in various departments.</li>
+            <li className="li">Tools I used:</li>
+            <ul className="ul2">
+              <li className="li">HTML</li>
+              <li className="li">CSS</li>
+              <li className="li">JavaScript</li>
+              <li className="li">Microsoft SQL Server</li>
+              <li className="li">Java</li>
+              <li className="li">IBM Mainframe</li>
+              <li className="li">PL/I</li>
+              <li className="li">REXX</li>
+            </ul>
+          </ul>
         </CustomTabPanel>
       </div>
-    </>
+    </div>
   );
 };
 

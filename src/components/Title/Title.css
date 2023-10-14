@@ -1,5 +1,5 @@
 .title {
-  min-height: 50px;
+ width: 100vw;
   max-height: 50px;
   font-size: 2rem;
   font-weight: 700;
@@ -8,7 +8,7 @@
   justify-content: baseline;
   line-height: 2;
   text-transform: uppercase;
-  position: absolute;
+margin-left: calc(22%);
   top: 30px;
   left: calc(((100vw - 80vw) / 2) + 30px);
   background: -webkit-linear-gradient(#00fed7, #8cfae9);
@@ -20,6 +20,7 @@
 
 @media only screen and (max-width: 950px) {
   .title {
+    margin-left: 0;
     min-height: 50px;
     max-height: 50px;
     font-size: 2rem;
@@ -30,7 +31,7 @@
     line-height: 2;
     text-transform: uppercase;
     position: absolute;
-    top: 60px;
+    top: calc(((var(--vh, 1vh) * 100) - 800px));
     left: 30px;
     background: -webkit-linear-gradient(#00fed7, #8cfae9);
     -webkit-background-clip: text;

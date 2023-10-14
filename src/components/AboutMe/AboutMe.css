@@ -1,10 +1,10 @@
 .aboutme-container {
   text-align: center;
-  position: relative;
+
   top: 80px;
-  width: 80%;
+  width: 60%;
   height: 100vh; /* Fallback for browsers that do not support Custom Properties */
-  height: calc((var(--vh, 1vh) * 100) - 200px);
+  height: calc((var(--vh, 1vh) * 100) - 300px);
   background: rgba(0, 0, 0, 0.3);
   border-radius: 30px;
   margin: auto;
@@ -46,7 +46,7 @@
   }
 
   .aboutme-container {
-    position: relative;
+
     top: 110px;
     width: 98%;
     /* Fallback for browsers that do not support Custom Properties */

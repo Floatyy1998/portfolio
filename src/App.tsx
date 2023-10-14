@@ -5,6 +5,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Pages from "./components/Pages/Pages";
 import { useCallback, useEffect } from "react";
+import Div100vh from 'react-div-100vh';
 
 function App() {
   useEffect(() => {
@@ -12,10 +13,15 @@ function App() {
       // We execute the same script as before
       let vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty("--vh", `${vh}px`);
+      
+      
     });
+   
+    
+
   }, []);
   const particlesInit = useCallback(async (engine: Engine) => {
-    console.log(engine);
+
 
     await loadSlim(engine);
   }, []);
@@ -25,6 +31,7 @@ function App() {
     []
   );
   return (
+    <Div100vh>
     <>
       <Particles
         id="tsparticles"
@@ -78,7 +85,11 @@ function App() {
         <Pages />
       </div>
     </>
+    </Div100vh>
   );
+  
+      
+  
 }
 
 export default App;

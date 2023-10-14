@@ -8,7 +8,18 @@ import "./InfoButton.css";
 
 const InfoButton = () => {
   const actions = [
-    { icon: <LinkedInIcon />, name: "LinkedIn", onclick: () => {} },
+    {
+      icon: <LinkedInIcon />,
+      name: "LinkedIn",
+      onclick: () => {
+        window
+          .open(
+            "https://www.linkedin.com/in/konrad-dinges-803098296/",
+            "_blank"
+          )
+          ?.focus();
+      },
+    },
     {
       icon: <GitHubIcon />,
       name: "Github",
@@ -22,7 +33,12 @@ const InfoButton = () => {
     <SpeedDial
       ariaLabel="SpeedDial basic example"
       direction="left"
-      icon={<InfoOutlinedIcon style={{ width: "40px", height: "40px" }} />}
+      icon={
+        <InfoOutlinedIcon
+          className="info"
+          style={{ width: "40px", height: "40px" }}
+        />
+      }
     >
       {actions.map((action) => (
         <SpeedDialAction

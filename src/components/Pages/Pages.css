@@ -45,3 +45,12 @@
 .MuiStepConnector-lineHorizontal {
   margin-top: 8px !important;
 }
+
+
+
+@media only screen and (max-width: 950px) {
+ 
+  .awssld__controls{
+    visibility: visible !important ;
+  }
+}

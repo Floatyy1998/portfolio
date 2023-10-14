@@ -9,9 +9,12 @@ import AboutMe from "../AboutMe/AboutMe";
 import Experiences from "../Experiences/Experiences";
 import Projects from "../Projects/Projects";
 import Contact from "../Contact/Contact";
+import AwesomeSlider from "react-awesome-slider";
+import "react-awesome-slider/dist/styles.css";
+import "react-awesome-slider/dist/custom-animations/cube-animation.css";
 
 const Pages = () => {
-  const [page, setPage] = React.useState(1);
+  const [page, setPage] = React.useState(0);
 
   const handleInView = (inView: boolean, entry: any) => {
     if (inView) {
@@ -22,56 +25,34 @@ const Pages = () => {
 
   return (
     <>
-      <Nav active={page} />
+      <AwesomeSlider
+        bullets={false}
+        fillParent={true}
+        selected={page}
+        mobileTouch={false}
+        animation="cubeAnimation"
+        onTransitionRequest={(e) => setPage(e.nextIndex)}
+       
+      >
+        <div>
+          <Home />
+        </div>
+        <div>
+          <AboutMe />
+        </div>
+        <div>
+          <Experiences />
+        </div>
+        <div>
+          <Projects />
+        </div>
+        <div>
+          <Contact />
+        </div>
+      </AwesomeSlider>
+      <Nav active={page} setActive={(page) => setPage(page)} />
 
       <InfoButton />
-      <div className="container ">
-        <InView
-          className="stop home"
-          id="1"
-          as="div"
-          threshold={0.7}
-          onChange={(inView, entry) => handleInView(inView, entry)}
-        >
-          <Home />
-        </InView>
-        <InView
-          className="stop"
-          id="2"
-          as="div"
-          threshold={0.7}
-          onChange={(inView, entry) => handleInView(inView, entry)}
-        >
-          <AboutMe/>
-        </InView>
-        <InView
-          className="stop"
-          id="3"
-          as="div"
-          threshold={0.7}
-          onChange={(inView, entry) => handleInView(inView, entry)}
-        >
-          <Experiences/>
-        </InView>
-        <InView
-          className="stop"
-          id="4"
-          as="div"
-          threshold={0.7}
-          onChange={(inView, entry) => handleInView(inView, entry)}
-        >
-          <Projects/>
-        </InView>
-        <InView
-          className="stop"
-          id="5"
-          as="div"
-          threshold={0.7}
-          onChange={(inView, entry) => handleInView(inView, entry)}
-        >
-          <Contact/>
-        </InView>
-      </div>
     </>
   );
 };

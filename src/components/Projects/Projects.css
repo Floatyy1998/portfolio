@@ -1,10 +1,10 @@
 .projects-container {
   text-align: center;
-  position: relative;
+
   top: 80px;
-  width: 80%;
+  width: 60vw;
   height: 100vh; /* Fallback for browsers that do not support Custom Properties */
-  height: calc((var(--vh, 1vh) * 100) - 200px);
+  height: calc((var(--vh, 1vh) * 100) - 300px);
   background: rgba(0, 0, 0, 0.3);
   border-radius: 30px;
   margin: auto;
@@ -15,25 +15,77 @@
   scrollbar-width: none;
   /* Firefox */
   overflow-y: scroll;
+  display: flex;
+  flex-direction: row;
+}
+.css-1l7c0cy {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 60vw !important;
+  height: 80% !important;
+}
+.css-1f8sh1y {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.test2 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.title2 {
+  margin: 1%;
+}
+.MuiCardActionArea-root {
+  height: 90%;
+}
+.MuiCardActions-root {
+  height: 10%;
+}
+.Card {
+  max-width: 500px;
+}
+.css-1m9128y {
+  margin: 0 !important;
+}
+.MuiButton-textPrimary {
+  color: rgba(0, 212, 255, 1) !important;
+}
+
+@media only screen and (max-width: 950px) {
+  .projects-container {
+    top: 110px;
+    width: 98vw;
+    /* Fallback for browsers that do not support Custom Properties */
+    height: calc((var(--vh, 1vh) * 100) - 300px);
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 30px;
+    margin: auto;
+    max-height: calc(100vh - 330px);
+    scroll-snap-type: y mandatory;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+    overflow-y: scroll;
   }
-  
-  @media only screen and (max-width: 950px) {
-    .projects-container {
-      position: relative;
-      top: 110px;
-      width: 98%;
-      /* Fallback for browsers that do not support Custom Properties */
-      height: calc((var(--vh, 1vh) * 100) - 300px);
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 30px;
-      margin: auto;
-      max-height: calc(100vh - 330px);
-      scroll-snap-type: y mandatory;
-      -ms-overflow-style: none;
-      /* IE and Edge */
-      scrollbar-width: none;
-      /* Firefox */
-      overflow-y: scroll;
-    }
+  .Card {
+    max-width: 300px;
   }
-  
+  .css-1abc02a {
+    display: none;
+  }
+  .css-hn784z {
+    display: none;
+  }
+}

@@ -10,7 +10,7 @@ interface NavProps {
   active: number;
 }
 
-const Nav = ({ active }: NavProps) => {
+const Nav = (props) => {
   const iconButtons = [
     {
       icon: (
@@ -19,11 +19,11 @@ const Nav = ({ active }: NavProps) => {
       style: {
         height: "65px",
         width: "65px",
-        border: active === 1 ? "2px solid #00fed7" : "none",
-        color: active === 1 ? "#00fed7" : "white",
+        border: props.active === 0 ? "2px solid #00fed7" : "none",
+        color: props.active === 0 ? "#00fed7" : "white",
       },
       onClick: () =>
-        document.getElementById("1")?.scrollIntoView({ behavior: "smooth" }),
+        props.setActive(0)
     },{
       icon: (
         <PersonOutlineOutlinedIcon style={{ width: "45px", height: "45px" }} />
@@ -31,44 +31,44 @@ const Nav = ({ active }: NavProps) => {
       style: {
         height: "65px",
         width: "65px",
-        border: active === 2 ? "2px solid #00fed7" : "none",
-        color: active === 2 ? "#00fed7" : "white",
+        border: props.active === 1 ? "2px solid #00fed7" : "none",
+        color: props.active === 1 ? "#00fed7" : "white",
       },
       onClick: () =>
-        document.getElementById("2")?.scrollIntoView({ behavior: "smooth" }),
+      props.setActive(1)
     },
     {
       icon: <WorkOutlineIcon  style={{ width: "45px", height: "45px" }} />,
       style: {
         height: "65px",
         width: "65px",
-        border: active === 3 ? "2px solid #00fed7" : "none",
-        color: active === 3 ? "#00fed7" : "white",
+        border: props.active === 2 ? "2px solid #00fed7" : "none",
+        color: props.active === 2 ? "#00fed7" : "white",
       },
       onClick: () =>
-        document.getElementById("3")?.scrollIntoView({ behavior: "smooth" }),
+      props.setActive(2)
     },
     {
       icon: <CodeIcon style={{ width: "45px", height: "45px" }} />,
       style: {
         height: "65px",
         width: "65px",
-        border: active === 4 ? "2px solid #00fed7" : "none",
-        color: active === 4 ? "#00fed7" : "white",
+        border: props.active === 3 ? "2px solid #00fed7" : "none",
+        color: props.active === 3 ? "#00fed7" : "white",
       },
       onClick: () =>
-        document.getElementById("4")?.scrollIntoView({ behavior: "smooth" }),
+      props.setActive(3)
     },
     {
       icon: <MessageOutlinedIcon style={{ width: "35px", height: "35px" }} />,
       style: {
         height: "65px",
         width: "65px",
-        border: active === 5 ? "2px solid #00fed7" : "none",
-        color: active === 5 ? "#00fed7" : "white",
+        border: props.active === 4 ? "2px solid #00fed7" : "none",
+        color: props.active === 4 ? "#00fed7" : "white",
       },
       onClick: () =>
-        document.getElementById("5")?.scrollIntoView({ behavior: "smooth" }),
+      props.setActive(4)
     },
   ];
 
@@ -76,7 +76,7 @@ const Nav = ({ active }: NavProps) => {
     <Box
       sx={{
         width: "100%",
-        height: "80px",
+        
         position: "absolute",
         bottom: "16px",
         zIndex: 1000,
@@ -85,6 +85,7 @@ const Nav = ({ active }: NavProps) => {
       }}
     >
       <Box
+      id="nav"
         sx={{
           width: "400px",
           maxWidth: "95%",
