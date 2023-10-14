@@ -25,18 +25,19 @@
   font-size: 1.2rem !important;
 }
 .MuiTabs-indicator {
-  background: -webkit-linear-gradient(#00fed7, #8cfae9) !important;
+  background: none !important;
   -webkit-background-clip: text;
   background-clip: text;
 
-  -webkit-text-fill-color: transparent;
+  color: #00fed7 !important;
 }
 .Mui-selected {
   background: -webkit-linear-gradient(#00fed7, #8cfae9);
   -webkit-background-clip: text;
   background-clip: text;
 
-  -webkit-text-fill-color: transparent;
+  color: #00fed7 !important;
+  border-bottom:2px solid #00fed7   !important;
 }
 
 .tab-panel {
