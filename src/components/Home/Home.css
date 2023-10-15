@@ -19,6 +19,11 @@
   overflow-y: scroll;
   font-size: calc(3vh + 1vw);
 }
+.avatar{
+ margin: auto;
+ 
+
+}
 
 .Typewriter {
   color: #8cfae9;
