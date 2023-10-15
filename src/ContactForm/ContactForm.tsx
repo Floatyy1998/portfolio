@@ -30,6 +30,7 @@ const ContactForm = () => {
     if (!validator.isEmail(mail)) {
       setErrorMessage("Please enter a valid email");
       setMailError(true);
+      return;
     } else if (validator.isEmpty(subject)) {
       setErrorMessage("Please enter a subject");
       setSubjectError(true);
@@ -56,7 +57,7 @@ const ContactForm = () => {
     }
   };
   return (
-    <div style={{ width: "90%", height: "fit-content", margin: "auto" }}>
+    <div style={{ width: "95%", height: "92%", margin: "auto" }}>
       <form className="for" onSubmit={handleSubmit}>
         <div className="form_group">
           <TextField
@@ -86,6 +87,7 @@ const ContactForm = () => {
             id="message"
             error={messageError}
             helperText={messageError && errorMessage}
+            itemID="message"
           />
         </div>
         <Button

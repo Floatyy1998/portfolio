@@ -54,7 +54,7 @@
     background: rgba(0, 0, 0, 0.3);
     border-radius: 30px;
     margin: auto;
-    max-height: calc(85vh );
+    max-height: calc(75vh );
     scroll-snap-type: y mandatory;
     -ms-overflow-style: none;
     /* IE and Edge */
