@@ -1,33 +1,34 @@
 .contact-container {
   text-align: center;
-  position: relative;
+
   top: 80px;
-  width: 80%;
+  width: 60%;
   height: 100vh; /* Fallback for browsers that do not support Custom Properties */
   height: calc((var(--vh, 1vh) * 100) - 200px);
   background: rgba(0, 0, 0, 0.3);
   border-radius: 30px;
   margin: auto;
-  max-height: calc(100vh - 200px);
+  max-height: calc(100vh - 250px);
   scroll-snap-type: y mandatory;
   -ms-overflow-style: none;
   /* IE and Edge */
   scrollbar-width: none;
   /* Firefox */
   overflow-y: scroll;
+  display: flex;
+  flex-direction: row;
   }
   
   @media only screen and (max-width: 950px) {
     .contact-container {
-      position: relative;
       top: 110px;
-      width: 98%;
+      width: 98vw;
       /* Fallback for browsers that do not support Custom Properties */
-      height: calc((var(--vh, 1vh) * 100) - 300px);
+      height: calc((var(--vh, 1vh) * 100) - 160px);
       background: rgba(0, 0, 0, 0.3);
       border-radius: 30px;
       margin: auto;
-      max-height: calc(100vh - 330px);
+      max-height: calc(85vh );
       scroll-snap-type: y mandatory;
       -ms-overflow-style: none;
       /* IE and Edge */

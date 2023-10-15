@@ -15,6 +15,7 @@ import "react-awesome-slider/dist/custom-animations/cube-animation.css";
 
 const Pages = () => {
   const [page, setPage] = React.useState(0);
+  const [clickable, setClickable] = React.useState(true);
 
   const handleInView = (inView: boolean, entry: any) => {
     if (inView) {
@@ -26,12 +27,15 @@ const Pages = () => {
   return (
     <>
       <AwesomeSlider
+      
         bullets={false}
         fillParent={true}
         selected={page}
-        mobileTouch={false}
+        mobileTouch={true}
         animation="cubeAnimation"
         onTransitionRequest={(e) => setPage(e.nextIndex)}
+        onTransitionStart={(e) => setClickable(false)}
+        onTransitionEnd={(e) => setClickable(true)}
        
       >
         <div>
@@ -50,7 +54,7 @@ const Pages = () => {
           <Contact />
         </div>
       </AwesomeSlider>
-      <Nav active={page} setActive={(page) => setPage(page)} />
+      <Nav  active={page} setActive={(page) => setPage(page)} clickable={clickable} />
 
       <InfoButton />
     </>

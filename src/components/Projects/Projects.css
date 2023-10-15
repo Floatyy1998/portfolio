@@ -4,11 +4,11 @@
   top: 80px;
   width: 60vw;
   height: 100vh; /* Fallback for browsers that do not support Custom Properties */
-  height: calc((var(--vh, 1vh) * 100) - 300px);
+  height: calc((var(--vh, 1vh) * 100) - 200px);
   background: rgba(0, 0, 0, 0.3);
   border-radius: 30px;
   margin: auto;
-  max-height: calc(100vh - 200px);
+  max-height: calc(100vh - 250px);
   scroll-snap-type: y mandatory;
   -ms-overflow-style: none;
   /* IE and Edge */
@@ -70,11 +70,11 @@
     top: 110px;
     width: 98vw;
     /* Fallback for browsers that do not support Custom Properties */
-    height: calc((var(--vh, 1vh) * 100) - 300px);
+    height: calc((var(--vh, 1vh) * 100) - 160px);
     background: rgba(0, 0, 0, 0.3);
     border-radius: 30px;
     margin: auto;
-    max-height: calc(100vh - 330px);
+    max-height: calc(85vh );
     scroll-snap-type: y mandatory;
     -ms-overflow-style: none;
     /* IE and Edge */
@@ -85,10 +85,5 @@
   .Card {
     max-width: 300px;
   }
-  .css-1abc02a {
-    display: none;
-  }
-  .css-hn784z {
-    display: none;
-  }
+  
 }

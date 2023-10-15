@@ -1,16 +1,13 @@
 .title {
- width: 100vw;
+  width: 100vw;
   max-height: 50px;
   font-size: 2rem;
   font-weight: 700;
-  display: flex;
-  text-align: center;
-  justify-content: baseline;
+
   line-height: 2;
   text-transform: uppercase;
-margin-left: calc(22%);
-  top: 30px;
-  left: calc(((100vw - 80vw) / 2) + 30px);
+  margin-left: calc(22%);
+
   background: -webkit-linear-gradient(#00fed7, #8cfae9);
   -webkit-background-clip: text;
   background-clip: text;
@@ -25,14 +22,11 @@ margin-left: calc(22%);
     max-height: 50px;
     font-size: 2rem;
     font-weight: 700;
-    display: flex;
-    text-align: center;
-    justify-content: baseline;
+
     line-height: 2;
     text-transform: uppercase;
-    position: absolute;
-    top: calc(((var(--vh, 1vh) * 100) - 800px));
-    left: 30px;
+
+    margin-left: calc(7%);
     background: -webkit-linear-gradient(#00fed7, #8cfae9);
     -webkit-background-clip: text;
     background-clip: text;
