@@ -19,6 +19,8 @@ const Experiences = () => {
       name: "Serien Ranking",
       description: "Probably the most random thing you have ever seen!",
       image: serienRanking,
+      github:"https://github.com/Floatyy1998/Serien-Ranking",
+      demo:"https://serien.konrad-dinges.de"
     },
     {
       name: "Random Name #2",
@@ -84,10 +86,10 @@ function Item(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="large" color="primary">
+        <Button size="large" color="primary" onClick={()=>{window.open(props.item.github,'_blank')}}>
           Github
         </Button>
-        <Button size="large">Demo</Button>
+        <Button onClick={()=>{window.open(props.item.demo,'_blank')}} size="large">Demo</Button>
       </CardActions>
     </Card>
   );
