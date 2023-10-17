@@ -13,6 +13,7 @@ import node from "../../assets/tools/node.svg";
 import postgresql from "../../assets/tools/postgresql.svg";
 import react from "../../assets/tools/react.svg";
 import vue from "../../assets/tools/vue.svg";
+import language from "../../language/langauge";
 const tags = [
   <img width={50} src={bootstrap} alt={"Random image"} />,
   <img width={50} src={django} alt={"Random image"} />,
@@ -27,10 +28,10 @@ const tags = [
   <img width={50} src={react} alt={"Random image"} />,
   <img width={50} src={vue} alt={"Random image"} />,
 ];
-const AboutMe = () => {
+const AboutMe = (props) => {
   return (
     <>
-      <Title title={"About Me"} />
+      {props.language === "de" ?  language.de.aboutme.title : language.en.aboutme.title}
       <div className="aboutme-container">
         <p id="aboutme"
           style={{
@@ -42,37 +43,7 @@ const AboutMe = () => {
             textAlign: "left",
           }}
         >
-          <span>
-            <span>
-              Hello there, I'm <span className="color">Konrad</span>,
-            </span>
-            <img
-              src="https://media.giphy.com/media/RhGbWYqUJdPWM18zI6/giphy.gif"
-              width="50px"
-              height="50px"
-            ></img>
-            <br />
-            <span>
-              <br />a{" "}
-              <span className="color">versatile Full Stack Developer</span> with
-              a primary focus on creating{" "}
-              <span className="color">impactful applications</span> using{" "}
-              <span className="color">React </span>
-              and <span className="color">TypeScript</span>.
-              <br />
-              <span>
-                <br /> My{" "}
-                <span className="color">dedication to ongoing learning</span>{" "}
-                keeps me at <span className="color">tech's forefront</span>,
-                delivering <span className="color">dynamic solutions</span>.
-                <br />
-                Passionate about{" "}
-                <span className="color">Full Stack Development</span>, I strive
-                for seamless integration and outstanding outcomes in every
-                project.
-              </span>
-            </span>
-          </span>
+          {props.language === "de" ? language.de.aboutme.content : language.en.aboutme.content}
         </p>
         <p id="sphere" style={{ width: "30%" }}>
           <TagSphere

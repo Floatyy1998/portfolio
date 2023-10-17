@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Typography, Grid, Button, TextField } from "@mui/material";
 import validator from "validator";
 import emailjs from "emailjs-com";
+import language from "../language/langauge";
 
 import "./ContactForm.css";
 
-const ContactForm = () => {
+const ContactForm = (...props) => {
   const [loading, setLoading] = useState(false);
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -28,15 +29,27 @@ const ContactForm = () => {
     const subject = e.target[2].value;
     const message = e.target[4].value;
     if (!validator.isEmail(mail)) {
-      setErrorMessage("Please enter a valid email");
+      setErrorMessage(
+        props[0].language === "de"
+          ? language.de.contact.content.mail.error
+          : language.en.contact.content.mail.error
+      );
       setMailError(true);
       return;
     } else if (validator.isEmpty(subject)) {
-      setErrorMessage("Please enter a subject");
+      setErrorMessage(
+        props[0].language === "de"
+          ? language.de.contact.content.subject.error
+          : language.en.contact.content.subject.error
+      );
       setSubjectError(true);
       return;
     } else if (validator.isEmpty(message)) {
-      setErrorMessage("Please enter a message");
+      setErrorMessage(
+        props[0].language === "de"
+          ? language.de.contact.content.message.error
+          : language.en.contact.content.message.error
+      );
       setMessageError(true);
       return;
     }
@@ -48,7 +61,11 @@ const ContactForm = () => {
         "from-mail": mail,
         message: message,
       });
-      alert("email successfully sent.");
+      alert(
+        props[0].language === "de"
+          ? language.de.contact.content.alert
+          : language.en.contact.content.alert
+      );
     } catch (error) {
       console.log(error);
     } finally {
@@ -62,7 +79,11 @@ const ContactForm = () => {
         <div className="form_group">
           <TextField
             required
-            label="email"
+            label={
+              props[0].language === "de"
+                ? language.de.contact.content.mail.label
+                : language.en.contact.content.mail.label
+            }
             error={mailError}
             helperText={mailError && errorMessage}
             type="text"
@@ -71,7 +92,11 @@ const ContactForm = () => {
         <div className="form_group">
           <TextField
             type="text"
-            label="subject"
+            label={
+              props[0].language === "de"
+                ? language.de.contact.content.subject.label
+                : language.en.contact.content.subject.label
+            }
             name="subject"
             id="subject"
             error={subjectError}
@@ -82,7 +107,11 @@ const ContactForm = () => {
           <TextField
             className="message"
             type="text"
-            label="message"
+            label={
+              props[0].language === "de"
+                ? language.de.contact.content.message.label
+                : language.en.contact.content.message.label
+            }
             multiline
             id="message"
             error={messageError}
@@ -97,7 +126,9 @@ const ContactForm = () => {
           disabled={loading}
           type="submit"
         >
-          send
+          {props[0].language === "de"
+            ? language.de.contact.content.button
+            : language.en.contact.content.button}
         </Button>
       </form>
     </div>

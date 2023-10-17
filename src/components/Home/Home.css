@@ -42,6 +42,18 @@
 
   -webkit-text-fill-color: transparent;
 }
+#contactBtn{
+  border:1px solid #00fed7 !important;
+    color: #00fed7 !important;
+    border-radius: 20px !important;
+    width: 10% !important;
+    min-width: 200px !important;
+    height: 5vh !important;
+    min-height: 50px !important;
+    max-width: 90% !important;
+    background: rgba(0, 0, 0, 0.8);
+    margin-top: 3%;
+}
 
 @media only screen and (max-width: 950px) {
   .home-container {

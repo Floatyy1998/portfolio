@@ -14,8 +14,19 @@ import "react-awesome-slider/dist/styles.css";
 import "react-awesome-slider/dist/custom-animations/cube-animation.css";
 
 const Pages = () => {
+ 
+  useEffect(() => {
+   
+    if (navigator.languages&&navigator.languages.length!==0) {
+     setLanguage(navigator.languages[0].slice(0,2));
+
+     
+    }
+  }, []);
   const [page, setPage] = React.useState(0);
   const [clickable, setClickable] = React.useState(true);
+  const [language , setLanguage] = React.useState("en");
+  
 
   const handleInView = (inView: boolean, entry: any) => {
     if (inView) {
@@ -39,19 +50,19 @@ const Pages = () => {
        
       >
         <div>
-          <Home />
+          <Home language={language} setActive={(page) => setPage(page)} />
         </div>
         <div>
-          <AboutMe />
+          <AboutMe language={language}/>
         </div>
         <div>
-          <Experiences />
+          <Experiences language={language}/>
         </div>
         <div>
-          <Projects />
+          <Projects language={language}/>
         </div>
         <div>
-          <Contact />
+          <Contact language={language}/>
         </div>
       </AwesomeSlider>
       <Nav  active={page} setActive={(page) => setPage(page)} clickable={clickable} />

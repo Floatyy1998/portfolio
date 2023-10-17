@@ -1,13 +1,14 @@
 import ContactForm from "../../ContactForm/ContactForm";
 import Title from "../Title/Title";
 import "./Contact.css";
-const Experiences = () => {
+import language from "../../language/langauge";
+const Experiences = (props) => {
    
   return (
     <>
-    <Title title={"Contact"}/>
+    {props.language === "de" ? language.de.contact.title : language.en.contact.title}
     <div className="contact-container">
-     <ContactForm/>
+     <ContactForm language={props.language}/>
     </div>
     </>
   );
