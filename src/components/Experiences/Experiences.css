@@ -41,8 +41,10 @@
 }
 
 .tab-panel {
-  height: calc((var(--vh, 1vh) * 100) - 350px);
-  overflow: scroll;
+  height: 100% !important;
+  
+  overflow-y: scroll;
+  overflow-x: none;
 }
 .header {
   width: 100%;
@@ -119,7 +121,8 @@
 
 .tab-panel-content {
   width: 40%;
-  height: 100%;
+  height: fit-content !important;
+  min-height: 100%;
   border: 1px solid #00fed7;
   border-radius: 20px;
 }
@@ -147,11 +150,12 @@
   .tab-panel-content {
     width: 100% !important;
     padding-top: 10px;
-    height: 62vh !important;
+    min-height: 57vh !important;
+    height: fit-content !important;
     border: 1px solid #00fed7;
     border-radius: 20px;
     overflow-y: scroll;
-    overflow-x: hidden;
+    overflow-x: none;
   }
   .ul {
     font-size: calc(1vh + 2vw) !important;

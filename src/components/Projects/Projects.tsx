@@ -15,7 +15,22 @@ import { Button, CardActionArea, CardActions } from "@mui/material";
 import serienRanking from "../../assets/serienranking.png";
 import portfolio from "../../assets/portfolio.png";
 import language from "../../language/langauge";
+import dogr from "../../assets/dogr.png";
+
 const Experiences = (props) => {
+  useEffect(() => {
+    for (
+      let index = 0;
+      index < document.getElementsByClassName("Card").length;
+      index++
+    ) {
+      let x = document.getElementsByClassName("Card")[index].parentNode
+        .parentNode as HTMLElement;
+      if (x.style.display === "block") {
+        console.log(index);
+      }
+    }
+  }, []);
   var items = [
     {
       name:
@@ -43,6 +58,19 @@ const Experiences = (props) => {
       github: "https://github.com/Floatyy1998/portfolio",
       demo: "https://konrad-dinges.de",
     },
+    {
+      name:
+        props.language === "de"
+          ? language.de.projects.content.dogr.name
+          : language.en.projects.content.dogr.name,
+      description:
+        props.language === "de"
+          ? language.de.projects.content.dogr.description
+          : language.en.projects.content.dogr.description,
+      image: dogr,
+      github: "https://github.com/dogr-org",
+      demo: "null",
+    },
   ];
 
   return (
@@ -53,14 +81,31 @@ const Experiences = (props) => {
       <div className="projects-container">
         <Carousel
           swipe={true}
-          className="test2"
+          className="carousel"
           interval={10000}
           navButtonsAlwaysVisible={true}
           indicators={true}
           height={"100%"}
           animation="fade"
           duration={500}
-          autoPlay={false}
+          autoPlay={true}
+          navButtonsWrapperProps={{
+            // Move the buttons to the bottom. Unsetting top here to override default style.
+            className: "carousel-buttons-wrapper",
+         
+          }}
+          navButtonsProps={{
+            className: "carousel-buttons",
+           
+          }}
+          indicatorIconButtonProps={{
+            style: {
+              margin: "5px", // 1
+            },
+          }}
+          activeIndicatorIconButtonProps={{
+            className: "active", // 2
+          }}
         >
           {items.map((item, i) => (
             <Item key={i} item={item} />
@@ -100,7 +145,7 @@ function Item(props) {
             variant="h5"
             component="div"
             style={{
-              paddingTop: "5%",
+              paddingTop: "1%",
               paddingBottom: "5%",
               height: "20%",
               border: "1px solid #222",
@@ -112,8 +157,8 @@ function Item(props) {
           <Typography
             variant="body2"
             style={{
-              paddingTop: "15%",
-              paddingBottom: "15%",
+              paddingTop: "1%",
+              paddingBottom: "1%",
               height: "80%",
               border: "1px solid #222",
               borderRadius: "10px",

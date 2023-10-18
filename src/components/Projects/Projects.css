@@ -34,8 +34,25 @@
   width: 100% !important;
   height: 100% !important;
 }
+.active > span {
+  background: #00fed7 !important;
+}
+.carousel-buttons-wrapper {
+  width: 14vw !important;
 
-.test2 {
+}
+
+.carousel-buttons {
+  background-color: rgba(0, 0, 0, 0.9) !important;
+  color: white !important;
+  border-radius: 10px !important;
+  border: 1px solid #222 !important;
+  margin: auto !important;
+  width: 20% !important;
+  filter: none !important;
+  opacity: 0.9 !important;
+}
+.carousel {
   width: 100%;
   height: 100%;
   display: flex;
@@ -74,7 +91,7 @@
     background: rgba(0, 0, 0, 0.3);
     border-radius: 30px;
     margin: auto;
-    max-height: calc(75vh );
+    max-height: calc(75vh);
     scroll-snap-type: y mandatory;
     -ms-overflow-style: none;
     /* IE and Edge */
@@ -85,5 +102,20 @@
   .Card {
     max-width: 300px;
   }
+
+  .carousel-buttons-wrapper {
+    width: 12vw !important;
   
+  }
+  
+  .carousel-buttons {
+    background-color: rgba(0, 0, 0, 0.9) !important;
+    color: white !important;
+    border-radius: 10px !important;
+    border: 1px solid #222 !important;
+    margin: auto !important;
+    width: 50% !important;
+    filter: none !important;
+    opacity: 0.9 !important;
+  }
 }
