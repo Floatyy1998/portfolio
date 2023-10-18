@@ -41,7 +41,7 @@
 }
 
 .tab-panel {
-  height: 100% !important;
+  height: calc(var(--vh, 1vh)*100 - 320px) !important;
   
   overflow-y: scroll;
   overflow-x: none;
