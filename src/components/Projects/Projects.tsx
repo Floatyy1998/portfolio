@@ -16,6 +16,7 @@ import serienRanking from "../../assets/serienranking.png";
 import portfolio from "../../assets/portfolio.png";
 import language from "../../language/langauge";
 import dogr from "../../assets/dogr.png";
+import shoppinglist from "../../assets/shoppinglist.png";
 
 const Experiences = (props) => {
   useEffect(() => {
@@ -70,6 +71,19 @@ const Experiences = (props) => {
       image: dogr,
       github: "https://github.com/dogr-org",
       demo: "null",
+    },
+    {
+      name:
+        props.language === "de"
+          ? language.de.projects.content.shoppinglist.name
+          : language.en.projects.content.shoppinglist.name,
+      description:
+        props.language === "de"
+          ? language.de.projects.content.shoppinglist.description
+          : language.en.projects.content.shoppinglist.description,
+      image: shoppinglist,
+      github: "https://github.com/Floatyy1998/ShoppingList",
+      demo: "https://einkaufen.konrad-dinges.de",
     },
   ];
 

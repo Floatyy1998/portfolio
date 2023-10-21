@@ -183,6 +183,11 @@ const language = {
           description:
             "Dogr is a social network for all people who love dogs. The main idea behind Dogr is to combine all dog related topics on one single platform. Since the application is still in development, only a very brief demo of the project is available at this point in time.",
         },
+        shoppinglist: {
+          name: "Shopping List",
+          description:
+            "A simple shopping list built with React, TypeScript, and Firebase.",
+        },
       },
     },
     contact: {
@@ -390,6 +395,11 @@ const language = {
           name: "DOGR",
           description:
             "Dogr ist ein soziales Netzwerk für alle Menschen, die Hunde lieben. Die Hauptidee hinter Dogr ist es, alle hundebezogenen Themen auf einer einzigen Plattform zu vereinen. Da sich die Anwendung noch in der Entwicklung befindet, ist zum jetzigen Zeitpunkt nur eine sehr kurze Demo des Projekts verfügbar.",
+        },
+        shoppinglist: {
+          name: "Einkaufsliste",
+          description:
+            "Eine einfache Einkaufsliste, die mit React, Typescript und Firebase erstellt wurde.",
         },
       },
     },
