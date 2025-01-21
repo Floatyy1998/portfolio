@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { Code2, Folder, Trophy } from 'lucide-react';
-
+import Haba from '../assets/Haba.png';
+import Huk from '../assets/Huk2.svg';
+import Kapp from '../assets/Kapp.svg';
 import { useLanguage } from '../context/LanguageContext';
 
 export function Career() {
@@ -11,8 +13,7 @@ export function Career() {
       company: t('HUK-COBURG'),
       period: 'Sept. 2022 - Present',
       description: t('apprenticeshipHUKCoburgDescription'),
-      image:
-        'https://sda.se/wp-content/uploads/2021/12/HUK_Logo_Wordpress_1920x1080.png?auto=format&fit=crop&q=80&w=800',
+      image: Huk,
       icon: Trophy,
       achievements: [
         t('apprenticeshipHUKCoburgAchievement1'),
@@ -20,14 +21,14 @@ export function Career() {
         t('apprenticeshipHUKCoburgAchievement3'),
         t('apprenticeshipHUKCoburgAchievement4'),
       ],
+      url: 'https://www.huk.de',
     },
     {
       title: t('internshipKapp'),
       company: 'KAPP NILES',
       period: 'Apr. 2020 - Jun. 2020',
       description: t('internshipKappDescription'),
-      image:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6f3KLm-2XrvhzUp36hkgs6OlSod7jNOCDsg&s?auto=format&fit=crop&q=80&w=800',
+      image: Kapp,
       icon: Code2,
       achievements: [
         t('internshipKappAchievement1'),
@@ -35,16 +36,17 @@ export function Career() {
         t('internshipKappAchievement3'),
         t('internshipKappAchievement4'),
       ],
+      url: 'https://www.kapp-niles.com',
     },
     {
       title: t('internshipHaba'),
       company: 'HABA',
       period: 'Okt. 2013',
       description: t('internshipHabaDescription'),
-      image:
-        'https://m.media-amazon.com/images/S/aplus-media/sota/663b2d20-262d-4799-b653-e67715bd6d9e.__CR48,0,1167,361_PT0_SX970_V1___.png?auto=format&fit=crop&q=80&w=800',
+      image: Haba,
       icon: Folder,
       achievements: [t('internshipHabaAchievement1')],
+      url: 'https://habafamilygroup.com/',
     },
   ];
   return (
@@ -90,12 +92,13 @@ export function Career() {
                     transition={{
                       duration: 0.2,
                     }}
-                    className='rounded-lg overflow-hidden shadow-lg'
+                    className='rounded-lg overflow-hidden shadow-lg aspect-w-16 aspect-h-9 cursor-pointer'
+                    onClick={() => window.open(career.url, '_blank')}
                   >
                     <img
                       src={career.image}
                       alt={career.title}
-                      className='w-full h-64 object-cover'
+                      className='w-full h-full object-cover'
                     />
                   </motion.div>
                 </div>
