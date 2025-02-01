@@ -103,7 +103,10 @@ export function Career() {
                   </motion.div>
                 </div>
                 <div className='relative pl-8 border-l-2 border-gray-200 dark:border-gray-700'>
-                  <div className='absolute -left-3 top-0'>
+                  <div
+                    className='absolute top-0'
+                    style={{ left: '-1.08rem', transform: 'translateY(-10%)' }}
+                  >
                     <div className='bg-blue-600 p-2 rounded-full'>
                       <career.icon className='w-4 h-4 text-white' />
                     </div>

@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import DOGR from '../assets/DOGR.jpg';
 import Portfolio from '../assets/Portfolio.jpg';
 import Serien from '../assets/Serien.jpg';
 import { useLanguage } from '../context/LanguageContext';
@@ -29,6 +30,15 @@ export function Projects() {
       image: Portfolio,
       onclick: () => {
         window.open('konrad-dinges.de');
+      },
+    },
+    {
+      title: t('dogrTitle'),
+      description: t('dogrDescription'),
+      tech: ['Kotlin', 'React', 'TypeScript'],
+      image: DOGR,
+      onclick: () => {
+        window.open('https://github.com/dogr-org');
       },
     },
   ];

@@ -3,7 +3,9 @@ import { About } from './components/About';
 import { Career } from './components/Career';
 import { Contact } from './components/Contact';
 import { Header } from './components/Header';
+import { Impressum } from './components/Impressum';
 import { Projects } from './components/Projects';
+
 export function App() {
   return (
     <Router>
@@ -14,6 +16,7 @@ export function App() {
           <Route path='/career' element={<Career />} />
           <Route path='/projects' element={<Projects />} />
           <Route path='/contact' element={<Contact />} />
+          <Route path='/impressum' element={<Impressum />} />
         </Routes>
       </div>
     </Router>

@@ -25,6 +25,10 @@ export function Header() {
       name: t('contact'),
       path: '/contact',
     },
+    {
+      name: t('impressum'),
+      path: '/impressum',
+    },
   ];
   const isActive = (path: string) => location.pathname === path;
 
