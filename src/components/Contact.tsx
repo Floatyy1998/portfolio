@@ -125,7 +125,7 @@ export function Contact() {
                     <p className='font-medium dark:text-white'>
                       {t('location')}
                     </p>
-                    <p>Coburg, DE</p>
+                    <p>Meeder, DE</p>
                   </div>
                 </div>
               </div>

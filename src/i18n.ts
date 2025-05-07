@@ -17,9 +17,15 @@ export const translations: Translations = {
     portfolioWebsiteTitle: 'Portfolio Website',
     portfolioWebsiteDescription:
       'A modern portfolio website with dark mode support, smooth animations, and responsive design. Features include dynamic theme switching, animated transitions, and optimized performance.',
+    classpulseTitle: 'Classpulse',
+    classpulseDescription:
+      'Classpulse is a web application that allows teachers to collect anonymous feedback from students. The application provides an easy way to create surveys and analyze the results in real-time.',
     dogrTitle: 'DOGR',
     dogrDescription:
       'Dogr is a social network for all people who love dogs. It started as a learning project for me and my friends and the main idea behind Dogr is to combine all dog related topics on one single platform. The project allows us to face a variety of different challenges of web development and offers the possibility to try out new and interesting technologies. Since the application is still in development, only a very brief demo of the project is available at this point in time.',
+    WatchRadarTitle: 'WatchRadar',
+    WatchRadarDescription:
+      'WatchRadar allows you to search the availability of movies and TV shows across various streaming services worldwide.',
     getInTouch: 'Get in Touch',
     contactIntro:
       'Have a question or want to work together? Feel free to reach out!',
@@ -92,9 +98,15 @@ export const translations: Translations = {
     portfolioWebsiteTitle: 'Portfolio-Website',
     portfolioWebsiteDescription:
       'Eine moderne Portfolio-Website mit Unterstützung für den Dunkelmodus, flüssigen Animationen und responsivem Design. Zu den Funktionen gehören dynamisches Themenswitching, animierte Übergänge und optimierte Leistung.',
+    classpulseTitle: 'Classpulse',
+    classpulseDescription:
+      'Classpulse ist eine Webanwendung, die es Lehrern ermöglicht, anonymes Feedback von Schülern zu sammeln. Die Anwendung bietet eine einfache Möglichkeit, Umfragen zu erstellen und die Ergebnisse in Echtzeit zu analysieren.',
     dogrTitle: 'DOGR',
     dogrDescription:
       'Dogr ist ein soziales Netzwerk für alle, die Hunde lieben. Es begann als ein Lernprojekt für mich und meine Freunde. Die Hauptidee hinter Dogr ist es, alle hundebezogenen Themen auf einer einzigen Plattform zu vereinen. Das Projekt ermöglicht es uns, verschiedene Herausforderungen der Webentwicklung zu meistern und neue, interessante Technologien auszuprobieren. Da sich die Anwendung noch in der Entwicklung befindet, steht derzeit nur eine sehr kurze Demo des Projekts zur Verfügung.',
+    WatchRadarTitle: 'WatchRadar',
+    WatchRadarDescription:
+      'WatchRadar ermöglicht es Ihnen, die Verfügbarkeit von Filmen und TV-Sendungen auf verschiedenen Streaming-Diensten weltweit zu suchen.',
     getInTouch: 'Kontakt aufnehmen',
     contactIntro:
       'Haben Sie eine Frage oder möchten Sie zusammenarbeiten? Zögern Sie nicht, sich zu melden!',

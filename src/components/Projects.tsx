@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
+import Classpulse from '../assets/Classpulse.png';
 import DOGR from '../assets/DOGR.jpg';
 import Portfolio from '../assets/Portfolio.jpg';
 import Serien from '../assets/Serien.jpg';
+import WatchRadar from '../assets/WatchRadar.jpg';
 import { useLanguage } from '../context/LanguageContext';
 
 export function Projects() {
@@ -10,10 +12,19 @@ export function Projects() {
     {
       title: t('SeriesTitle'),
       description: t('SeriesDescription'),
-      tech: ['React', 'Node.js', 'Firebase', 'Material-UI'],
+      tech: ['React', 'Node.js', 'Firebase', 'Material-UI', 'TypeScript'],
       image: Serien,
       onclick: () => {
-        window.open('serien.konrad-dinges.de');
+        window.open('https://serien.konrad-dinges.de');
+      },
+    },
+    {
+      title: t('WatchRadarTitle'),
+      description: t('WatchRadarDescription'),
+      tech: ['React', 'Node.js', 'Firebase', 'Tailwind CSS', 'TypeScript'],
+      image: WatchRadar,
+      onclick: () => {
+        window.open('https://watchradar.konrad-dinges.de');
       },
     },
     {
@@ -30,6 +41,15 @@ export function Projects() {
       image: Portfolio,
       onclick: () => {
         window.open('konrad-dinges.de');
+      },
+    },
+    {
+      title: t('classpulseTitle'),
+      description: t('classpulseDescription'),
+      tech: ['React', 'JavaScript', 'Material-UI', 'ASP.NET Core', 'C#'],
+      image: Classpulse,
+      onclick: () => {
+        window.open('https://github.com/Floatyy1998/ClassPulse');
       },
     },
     {
