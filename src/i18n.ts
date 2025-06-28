@@ -55,12 +55,20 @@ export const translations: Translations = {
     internshipHabaDescription:
       'Learning basic programming principles and algorithms with Java.',
     apprenticeshipHUKCoburg: 'Apprenticeship',
+    HUKCoburg: 'HUK-COBURG',
     apprenticeshipHUKCoburgAchievement1: 'Working with Angular',
     apprenticeshipHUKCoburgAchievement2: 'Working with TypeScript',
     apprenticeshipHUKCoburgAchievement3: 'CI/CD with Jenkins',
     apprenticeshipHUKCoburgAchievement4: 'AWS',
     apprenticeshipHUKCoburgDescription:
-      'Developing the tariff calculator for HUK Coburg, HUK24, and VRK using Angular.',
+      'Developing the tariff calculators for HUK Coburg, HUK24, and VRK using Angular.',
+    webDeveloperHUKCoburg: 'Web Developer',
+    webDeveloperHUKCoburgAchievement1: 'Full-time web development with Angular',
+    webDeveloperHUKCoburgAchievement2: 'Advanced TypeScript development',
+    webDeveloperHUKCoburgAchievement3: 'CI/CD pipeline optimization',
+    webDeveloperHUKCoburgAchievement4: 'Cloud infrastructure with AWS',
+    webDeveloperHUKCoburgDescription:
+      'Continuing development and enhancement of tariff calculators for HUK Coburg, HUK24, and VRK using Angular, with focus on performance optimization and new features.',
     careerJourney: 'Career Journey',
     fullStackDeveloper: 'Full Stack Developer',
     coffeeEnthusiast: 'Coffee Enthusiast',
@@ -137,12 +145,21 @@ export const translations: Translations = {
     internshipHabaDescription:
       'Erlernen grundlegender Programmierprinzipien und Algorithmen mit Java.',
     apprenticeshipHUKCoburg: 'Ausbildung',
+    HUKCoburg: 'HUK-COBURG',
     apprenticeshipHUKCoburgAchievement1: 'Umgang mit Angular',
     apprenticeshipHUKCoburgAchievement2: 'Umgang mit TypeScript',
     apprenticeshipHUKCoburgAchievement3: 'CI/CD mit Jenkins',
     apprenticeshipHUKCoburgAchievement4: 'AWS',
     apprenticeshipHUKCoburgDescription:
-      'Entwicklung des Tarifrechners für HUK Coburg, HUK24 und VRK mit Angular.',
+      'Entwicklung der Tarifrechner für HUK Coburg, HUK24 und VRK mit Angular.',
+    webDeveloperHUKCoburg: 'Webentwickler',
+    webDeveloperHUKCoburgAchievement1: 'Vollzeit-Webentwicklung mit Angular',
+    webDeveloperHUKCoburgAchievement2:
+      'Fortgeschrittene TypeScript-Entwicklung',
+    webDeveloperHUKCoburgAchievement3: 'CI/CD-Pipeline-Optimierung',
+    webDeveloperHUKCoburgAchievement4: 'Cloud-Infrastruktur mit AWS',
+    webDeveloperHUKCoburgDescription:
+      'Fortsetzung der Entwicklung und Verbesserung der Tarifrechner für HUK Coburg, HUK24 und VRK mit Angular, mit Fokus auf Performance-Optimierung und neue Features.',
     careerJourney: 'Karriereweg',
     fullStackDeveloper: 'Full Stack Entwickler',
     coffeeEnthusiast: 'Kaffee-Enthusiast',
