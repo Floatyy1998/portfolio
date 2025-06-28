@@ -12,9 +12,9 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "@mui/icons-material": "^6.4.2",
-    "@mui/material": "^6.4.2",
-    "dotenv": "^16.4.7",
+    "@mui/icons-material": "^7.1.2",
+    "@mui/material": "^7.1.2",
+    "dotenv": "^17.0.0",
     "emailjs-com": "^3.2.0",
     "framer-motion": "latest",
     "lucide-react": "latest",
@@ -23,7 +23,9 @@
     "react-router-dom": "latest"
   },
   "devDependencies": {
-    "@types/node": "^22.13.0",
+    "@eslint/js": "^9.30.0",
+    "@tailwindcss/postcss": "^4.1.11",
+    "@types/node": "^24.0.7",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "@typescript-eslint/eslint-plugin": "^8.22.0",
@@ -33,9 +35,11 @@
     "eslint": "^9.19.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.18",
+    "globals": "^16.2.0",
     "postcss": "latest",
-    "tailwindcss": "latest",
+    "tailwindcss": "^4.1.11",
     "typescript": "^5.7.3",
-    "vite": "^6.0.11"
+    "typescript-eslint": "^8.35.0",
+    "vite": "^7.0.0"
   }
 }
