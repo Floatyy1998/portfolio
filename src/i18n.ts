@@ -63,10 +63,10 @@ export const translations: Translations = {
     apprenticeshipHUKCoburgDescription:
       'Developing the tariff calculators for HUK Coburg, HUK24, and VRK using Angular.',
     webDeveloperHUKCoburg: 'Web Developer',
-    webDeveloperHUKCoburgAchievement1: 'Full-time web development with Angular',
-    webDeveloperHUKCoburgAchievement2: 'Advanced TypeScript development',
-    webDeveloperHUKCoburgAchievement3: 'CI/CD pipeline optimization',
-    webDeveloperHUKCoburgAchievement4: 'Cloud infrastructure with AWS',
+    webDeveloperHUKCoburgAchievement1: 'Frontend development with Angular',
+    webDeveloperHUKCoburgAchievement2: 'Working with TypeScript',
+    webDeveloperHUKCoburgAchievement3: 'Component-based development',
+    webDeveloperHUKCoburgAchievement4: 'Responsive web design',
     webDeveloperHUKCoburgDescription:
       'Continuing development and enhancement of tariff calculators for HUK Coburg, HUK24, and VRK using Angular, with focus on performance optimization and new features.',
     careerJourney: 'Career Journey',
@@ -153,11 +153,10 @@ export const translations: Translations = {
     apprenticeshipHUKCoburgDescription:
       'Entwicklung der Tarifrechner für HUK Coburg, HUK24 und VRK mit Angular.',
     webDeveloperHUKCoburg: 'Webentwickler',
-    webDeveloperHUKCoburgAchievement1: 'Vollzeit-Webentwicklung mit Angular',
-    webDeveloperHUKCoburgAchievement2:
-      'Fortgeschrittene TypeScript-Entwicklung',
-    webDeveloperHUKCoburgAchievement3: 'CI/CD-Pipeline-Optimierung',
-    webDeveloperHUKCoburgAchievement4: 'Cloud-Infrastruktur mit AWS',
+    webDeveloperHUKCoburgAchievement1: 'Frontend-Entwicklung mit Angular',
+    webDeveloperHUKCoburgAchievement2: 'Arbeiten mit TypeScript',
+    webDeveloperHUKCoburgAchievement3: 'Komponentenbasierte Entwicklung',
+    webDeveloperHUKCoburgAchievement4: 'Responsive Webdesign',
     webDeveloperHUKCoburgDescription:
       'Fortsetzung der Entwicklung und Verbesserung der Tarifrechner für HUK Coburg, HUK24 und VRK mit Angular, mit Fokus auf Performance-Optimierung und neue Features.',
     careerJourney: 'Karriereweg',
