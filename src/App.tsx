@@ -1,24 +1,46 @@
-import { Route, MemoryRouter as Router, Routes } from 'react-router-dom';
+import { useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import { Hero } from './components/Hero';
 import { About } from './components/About';
-import { Career } from './components/Career';
-import { Contact } from './components/Contact';
-import { Header } from './components/Header';
-import { Impressum } from './components/Impressum';
+import { Skills } from './components/Skills';
+import { Experience } from './components/Experience';
 import { Projects } from './components/Projects';
+import { Contact } from './components/Contact';
+import { Navigation } from './components/Navigation';
+import { ScrollProgress } from './components/ScrollProgress';
+import { SplashScreen } from './components/SplashScreen';
+import { Footer } from './components/Footer';
+import { Impressum } from './components/Impressum';
 
 export function App() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [showImpressum, setShowImpressum] = useState(false);
+
+  const handleLoadingComplete = () => {
+    setIsLoading(false);
+  };
+
   return (
-    <Router>
-      <div className='w-full min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300'>
-        <Header />
-        <Routes>
-          <Route path='/' element={<About />} />
-          <Route path='/career' element={<Career />} />
-          <Route path='/projects' element={<Projects />} />
-          <Route path='/contact' element={<Contact />} />
-          <Route path='/impressum' element={<Impressum />} />
-        </Routes>
-      </div>
-    </Router>
+    <AnimatePresence mode="wait">
+      {isLoading ? (
+        <SplashScreen key="splash" onComplete={handleLoadingComplete} />
+      ) : showImpressum ? (
+        <Impressum onClose={() => setShowImpressum(false)} />
+      ) : (
+        <>
+          <ScrollProgress />
+          <Navigation />
+          <main className="relative bg-black text-white overflow-hidden">
+            <Hero />
+            <About />
+            <Skills />
+            <Experience />
+            <Projects />
+            <Contact />
+            <Footer onImpressumClick={() => setShowImpressum(true)} />
+          </main>
+        </>
+      )}
+    </AnimatePresence>
   );
 }

@@ -1,1 +1,275 @@
-@import 'tailwindcss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: 59 130 246;
+    --color-secondary: 168 85 247;
+    --color-accent: 34 211 238;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    background: #0a0a0a;
+  }
+
+  ::selection {
+    @apply bg-white/10 text-white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-white/20 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-white/40;
+  }
+}
+
+@layer components {
+  .premium-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent;
+  }
+  
+  .glass-card {
+    @apply backdrop-blur-2xl bg-white/[0.02] border border-white/[0.05];
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0));
+  }
+  
+  .glow-card {
+    @apply relative overflow-hidden;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0));
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  .glow-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.03),
+      transparent
+    );
+    transition: left 0.5s;
+  }
+  
+  .glow-card:hover::before {
+    left: 100%;
+  }
+  
+  .subtle-gradient {
+    background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.15), transparent),
+                radial-gradient(ellipse at bottom, rgba(168, 85, 247, 0.15), transparent);
+  }
+  
+  .professional-button {
+    @apply relative px-8 py-4 overflow-hidden rounded-lg font-medium transition-all duration-300;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .professional-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+  }
+  
+  .professional-button:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
+  
+  .professional-button:hover::before {
+    left: 100%;
+  }
+
+  .mono-font {
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+  }
+  
+  .fade-in {
+    animation: fadeIn 1s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .premium-border {
+    position: relative;
+    background: linear-gradient(135deg, #0a0a0a, #111);
+  }
+  
+  .premium-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.5), rgba(168, 85, 247, 0.5));
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .premium-border:hover::before {
+    opacity: 1;
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300;
+    position: relative;
+  }
+  
+  .hover-glow::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899, #06b6d4, #3b82f6);
+    background-size: 400%;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s;
+    animation: gradient-rotate 3s linear infinite;
+    z-index: -1;
+    filter: blur(10px);
+  }
+  
+  .hover-glow:hover::before {
+    opacity: 1;
+  }
+  
+  @keyframes gradient-rotate {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .card-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    transform-origin: center;
+  }
+
+  .card-3d:hover {
+    transform: perspective(1000px) rotateY(15deg) rotateX(10deg) scale(1.05) translateZ(50px);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.8),
+                 0 0 40px rgba(139, 92, 246, 0.6),
+                 0 0 60px rgba(236, 72, 153, 0.4),
+                 0 0 80px rgba(6, 182, 212, 0.2);
+    animation: text-pulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes text-pulse {
+    0%, 100% { 
+      text-shadow: 0 0 20px rgba(59, 130, 246, 0.8),
+                   0 0 40px rgba(139, 92, 246, 0.6),
+                   0 0 60px rgba(236, 72, 153, 0.4),
+                   0 0 80px rgba(6, 182, 212, 0.2);
+    }
+    50% { 
+      text-shadow: 0 0 30px rgba(59, 130, 246, 1),
+                   0 0 50px rgba(139, 92, 246, 0.8),
+                   0 0 70px rgba(236, 72, 153, 0.6),
+                   0 0 100px rgba(6, 182, 212, 0.4);
+    }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .grid-bg {
+    background-image: 
+      linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: grid-move 20s linear infinite;
+  }
+  
+  @keyframes grid-move {
+    0% { background-position: 0 0, 0 0; }
+    100% { background-position: 50px 50px, 50px 50px; }
+  }
+  
+  .holographic {
+    background: linear-gradient(
+      135deg,
+      #667eea 0%,
+      #764ba2 25%,
+      #f093fb 50%,
+      #ffc0cb 75%,
+      #667eea 100%
+    );
+    background-size: 400% 400%;
+    animation: holographic-shift 4s ease infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  @keyframes holographic-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .matrix-text {
+    color: #0f0;
+    text-shadow: 0 0 5px #0f0, 0 0 10px #0f0;
+    font-family: 'Courier New', monospace;
+    animation: matrix-flicker 0.1s infinite;
+  }
+  
+  @keyframes matrix-flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+}
