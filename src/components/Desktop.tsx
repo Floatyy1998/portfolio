@@ -785,7 +785,7 @@ function SnakeGame() {
       ctx.fillStyle='#0a0a14';ctx.fillRect(0,0,G*S,G*S);ctx.fillStyle='#00e5ff08';for(let i=0;i<G;i++)for(let j=0;j<G;j++){if((i+j)%2===0)ctx.fillRect(i*S,j*S,S,S)}
       g.snake.forEach((s,i)=>{ctx.fillStyle=i===0?'#00e5ff':'#00e5ff60';ctx.beginPath();ctx.roundRect(s.x*S+1,s.y*S+1,S-2,S-2,3);ctx.fill()})
       ctx.fillStyle='#ff3366';ctx.beginPath();ctx.roundRect(g.food.x*S+2,g.food.y*S+2,S-4,S-4,4);ctx.fill()
-    }, 110)
+    }, 150)
     return () => { clearInterval(interval); window.removeEventListener('keydown', onKey) }
   }, [gameOver])
   const touchDir = (x:number,y:number) => { const d=dirRef.current; if(x!==0&&d.x===0)dirRef.current={x,y:0}; if(y!==0&&d.y===0)dirRef.current={x:0,y} }
@@ -801,6 +801,61 @@ function SnakeGame() {
         <div/><button onTouchStart={()=>touchDir(0,1)} className="w-10 h-10 rounded-lg bg-surface flex items-center justify-center text-primary text-lg">↓</button><div/>
       </div>
       <p className="text-text-muted text-xs font-mono hidden md:block">Arrow keys to move</p>
+    </div>
+  )
+}
+
+function ProjectStory({ items, meta, images, labels }: { items: { title: string; description: string; features: string[] }[]; meta: typeof projectMeta; images: string[]; labels: { live: string; code: string } }) {
+  const [tab, setTab] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const progress = useRef(0)
+  const tapTime = useRef(0)
+  const [, tick] = useState(0)
+  const total = items.length
+
+  useEffect(() => {
+    if (paused) return
+    const iv = setInterval(() => {
+      progress.current += 2
+      if (progress.current >= 100) { progress.current = 0; setTab(t2 => t2 >= total - 1 ? 0 : t2 + 1) }
+      tick(r => r + 1)
+    }, 100)
+    return () => clearInterval(iv)
+  }, [paused, total])
+
+  const goPrev = () => { if (Date.now() - tapTime.current < 300) { if (progress.current > 15) { progress.current = 0 } else { progress.current = 0; setTab(t2 => t2 > 0 ? t2 - 1 : t2) } } }
+  const goNext = () => { if (Date.now() - tapTime.current < 300) { progress.current = 0; setTab(t2 => t2 < total - 1 ? t2 + 1 : t2) } }
+  const p = items[tab]; const m = meta[tab]
+
+  return (
+    <div className="h-full flex flex-col bg-black relative select-none overflow-hidden"
+      onMouseDown={() => { setPaused(true); tapTime.current = Date.now() }} onMouseUp={() => setPaused(false)} onMouseLeave={() => setPaused(false)}
+      onTouchStart={() => { setPaused(true); tapTime.current = Date.now() }} onTouchEnd={() => setPaused(false)}>
+      <div className="absolute top-0 left-0 right-0 z-20 flex gap-1 px-3 pt-3">
+        {items.map((_, i) => (
+          <div key={i} className="flex-1 h-[3px] rounded-full bg-white/20 overflow-hidden cursor-pointer" onClick={e => { e.stopPropagation(); progress.current = 0; setTab(i) }}>
+            <div className="h-full rounded-full bg-white" style={{ width: i < tab ? '100%' : i === tab ? `${progress.current}%` : '0%', transition: 'none' }} />
+          </div>
+        ))}
+      </div>
+      <div className="absolute inset-0 z-0"><img src={images[tab]} alt={p.title} className="w-full h-full object-cover" /></div>
+      <div className="absolute inset-0 z-10 bg-gradient-to-t from-black from-25% via-black/60 via-50% to-transparent" />
+      <div className="absolute inset-0 z-30 flex">
+        <div className="w-1/3 h-full cursor-pointer" onClick={goPrev} />
+        <div className="w-1/3 h-full" />
+        <div className="w-1/3 h-full cursor-pointer" onClick={goNext} />
+      </div>
+      <div className="relative z-40 mt-auto p-6 pb-6 pointer-events-none [&_a]:pointer-events-auto">
+        <span className="text-white/30 text-[10px] font-mono">{String(tab + 1).padStart(2, '0')}/{String(total).padStart(2, '0')}</span>
+        <h3 className="font-display font-black text-2xl text-white mt-1 mb-2">{p.title}</h3>
+        <p className="text-white/80 text-sm leading-relaxed mb-4 max-w-lg">{p.description}</p>
+        <div className="flex flex-wrap gap-1.5 mb-3">{p.features.map(f => <span key={f} className="px-2.5 py-1 text-[10px] rounded-full bg-white/10 text-white/80 font-medium">{f}</span>)}</div>
+        <div className="flex flex-wrap gap-1.5 mb-5">{m.tech.map(tc => <span key={tc} className="px-2 py-0.5 text-[10px] font-mono rounded bg-white/10 text-white/50">{tc}</span>)}</div>
+        <div className="flex gap-2">
+          {m.url && <a href={m.url} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="px-5 py-2.5 rounded-xl bg-white text-black text-xs font-bold flex items-center gap-1.5 hover:bg-primary transition-colors">{labels.live} <ArrowUpRight size={12} /></a>}
+          {m.gh && <a href={m.gh} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="px-5 py-2.5 rounded-xl bg-white/15 text-white text-xs font-medium flex items-center gap-1.5 hover:bg-white/25 transition-colors"><GithubIcon size={12} />{labels.code}</a>}
+        </div>
+      </div>
     </div>
   )
 }
@@ -871,7 +926,7 @@ export function Desktop() {
     return ()=>{dock.removeEventListener('mousemove',onMove);dock.removeEventListener('mouseleave',onLeave)}
   }, [isMobile])
 
-  const openWindow = (id: string) => { setWindows(prev => { const existing=prev[id]; const idx=appDefs.findIndex(a=>a.id===id); const app=appDefs[idx]; const newZ=topZ+1; setTopZ(newZ); if(existing?.isOpen&&existing.minimized) return {...prev,[id]:{...existing,minimized:false,z:newZ}}; if(existing?.isOpen) return {...prev,[id]:{...existing,z:newZ}}; return {...prev,[id]:{isOpen:true,minimized:false,maximized:false,z:newZ,x:60+idx*40,y:45+idx*35,w:app.w,h:app.h}} }) }
+  const openWindow = (id: string) => { setWindows(prev => { const existing=prev[id]; const idx=appDefs.findIndex(a=>a.id===id); const app=appDefs[idx]; const newZ=topZ+1; setTopZ(newZ); if(existing?.isOpen&&existing.minimized) return {...prev,[id]:{...existing,minimized:false,z:newZ}}; if(existing?.isOpen) return {...prev,[id]:{...existing,z:newZ}}; return {...prev,[id]:{isOpen:true,minimized:false,maximized:false,z:newZ,x:60+(idx%5)*35,y:50+(idx%5)*30,w:app.w,h:Math.min(app.h, window.innerHeight - 170)}} }) }
   const closeWindow = (id: string) => setWindows(prev=>({...prev,[id]:{...prev[id],isOpen:false,maximized:false}}))
   const minimizeWindow = (id: string) => {
     const idx = appDefs.findIndex(a => a.id === id)
@@ -887,7 +942,7 @@ export function Desktop() {
 
   const activeWin = Object.entries(windows).filter(([,s])=>s.isOpen&&!s.minimized).sort(([,a],[,b])=>b.z-a.z)[0]
 
-  const handleMail = async (e: React.FormEvent) => { e.preventDefault(); if(!formRef.current)return; setMailStatus('sending'); try{await emailjs.sendForm(import.meta.env.VITE_EMAILJS_SERVICE_ID,import.meta.env.VITE_EMAILJS_TEMPLATE_ID,formRef.current,import.meta.env.VITE_EMAILJS_PUBLIC_KEY);setMailStatus('success');formRef.current.reset();notify(lang==='de'?'Nachricht gesendet!':'Message sent!');setTimeout(()=>setMailStatus('idle'),4000)}catch{setMailStatus('error');setTimeout(()=>setMailStatus('idle'),4000)} }
+  const handleMail = async (e: React.FormEvent<HTMLFormElement>) => { e.preventDefault(); if(!formRef.current)return; setMailStatus('sending'); try{await emailjs.sendForm(import.meta.env.VITE_EMAILJS_SERVICE_ID,import.meta.env.VITE_EMAILJS_TEMPLATE_ID,formRef.current,import.meta.env.VITE_EMAILJS_PUBLIC_KEY);setMailStatus('success');formRef.current.reset();notify(lang==='de'?'Nachricht gesendet!':'Message sent!');setTimeout(()=>setMailStatus('idle'),4000)}catch{setMailStatus('error');setTimeout(()=>setMailStatus('idle'),4000)} }
 
   const labels: Record<string, string> = { about:t.nav.about, skills:t.nav.skills, experience:t.nav.experience, projects:t.nav.projects, contact:t.nav.contact, terminal:'Terminal', snake:'Snake' }
 
@@ -902,7 +957,7 @@ export function Desktop() {
                 <img src={profileImage} className="w-24 h-24 rounded-full object-cover border-[3px] border-primary/30 shadow-[0_0_30px_rgba(0,229,255,0.15)]" />
                 <div className="absolute bottom-0.5 right-0.5 w-5 h-5 rounded-full bg-green-500 border-[3px] border-[#0a0a18]" />
               </div>
-              <h2 className="font-display font-black text-2xl text-text">Konrad Dinges</h2>
+              <h2 className="font-display font-bold text-xl text-text">Konrad Dinges</h2>
               <p className="text-primary font-mono text-sm mt-1">Full Stack Developer</p>
               <p className="text-text-muted text-xs mt-1 flex items-center justify-center gap-1"><MapPin size={11} />{t.contact.meederGermany}</p>
             </div>
@@ -915,7 +970,7 @@ export function Desktop() {
           <div className="grid grid-cols-3 mx-6 mb-4 rounded-2xl bg-surface overflow-hidden">
             {[{v:'3+',l:t.about.yearsExp,color:'#00e5ff'},{v:'15+',l:t.about.projectsCompleted,color:'#bf5af2'},{v:'10+',l:t.about.techMastered,color:'#ff3366'}].map((s,i)=>(
               <div key={i} className="py-3.5 text-center border-r border-white/[0.04] last:border-r-0">
-                <div className="font-display font-black text-2xl" style={{color:s.color}}>{s.v}</div>
+                <div className="font-display font-bold text-xl" style={{color:s.color}}>{s.v}</div>
                 <p className="text-text-muted text-[10px] uppercase tracking-wider mt-0.5">{s.l}</p>
               </div>
             ))}
@@ -1044,50 +1099,7 @@ export function Desktop() {
         </div>
       )
 
-      case 'projects': return (
-        <div className="h-full overflow-y-auto bg-[#0a0a18]">
-          <div className="px-6 pt-5 pb-3 flex items-center justify-between sticky top-0 bg-[#0a0a18]/90 backdrop-blur-xl z-10">
-            <div>
-              <p className="text-lg font-display font-bold text-text">{t.projects.title}</p>
-              <p className="text-xs text-text-muted">{t.projects.items.length} {lang === 'de' ? 'Projekte' : 'projects'}</p>
-            </div>
-          </div>
-          <div className="px-5 pb-5 space-y-4">
-            {t.projects.items.map((p, i) => {
-              const m = projectMeta[i]
-              return (
-                <div key={i} className="group rounded-2xl overflow-hidden bg-surface border border-white/[0.04] hover:border-white/[0.08] transition-all">
-                  <div className="relative aspect-[16/9] overflow-hidden">
-                    <img src={projectImages[i]} alt={p.title} className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-80" />
-                    <div className="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      {m.url && <a href={m.url} target="_blank" rel="noopener noreferrer" className="px-3.5 py-1.5 rounded-lg bg-primary text-bg text-xs font-bold shadow-lg flex items-center gap-1.5">Live <ArrowUpRight size={11}/></a>}
-                      {m.gh && <a href={m.gh} target="_blank" rel="noopener noreferrer" className="px-3.5 py-1.5 rounded-lg bg-black/60 backdrop-blur-sm text-white text-xs font-medium border border-white/10 flex items-center gap-1.5"><GithubIcon size={12}/>Code</a>}
-                    </div>
-                    <div className="absolute top-3 left-3 w-8 h-8 rounded-lg bg-black/40 backdrop-blur-sm flex items-center justify-center text-white/60 text-xs font-mono border border-white/10">{String(i+1).padStart(2,'0')}</div>
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-display font-bold text-base text-text mb-1.5">{p.title}</h3>
-                    <p className="text-text-muted text-sm leading-relaxed mb-3">{p.description}</p>
-                    <div className="flex flex-wrap gap-1.5 mb-3">
-                      {p.features.map(f => <span key={f} className="px-2.5 py-1 text-[10px] rounded-full bg-accent/8 text-accent border border-accent/10 font-medium">{f}</span>)}
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex flex-wrap gap-1.5">
-                        {m.tech.map(tc => <span key={tc} className="px-2 py-0.5 text-[10px] font-mono rounded bg-white/[0.04] text-text-muted">{tc}</span>)}
-                      </div>
-                      <div className="flex gap-2 shrink-0 ml-3">
-                        {m.url && <a href={m.url} target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary hover:bg-primary/20 transition-colors"><ArrowUpRight size={15}/></a>}
-                        {m.gh && <a href={m.gh} target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-lg bg-white/[0.04] flex items-center justify-center text-text-muted hover:text-text transition-colors"><GithubIcon size={15}/></a>}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      )
+      case 'projects': return <ProjectStory items={t.projects.items} meta={projectMeta} images={projectImages} labels={{ live: t.projects.liveDemo, code: t.projects.viewCode }} />
 
       case 'contact': return (
         <div className="h-full flex flex-col bg-[#0a0a18]">
