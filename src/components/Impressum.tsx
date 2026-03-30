@@ -1,121 +1,80 @@
-import { motion } from 'framer-motion';
-import { useLanguage } from '../context/LanguageContext';
-import { X } from 'lucide-react';
+import { motion } from 'framer-motion'
+import { ArrowLeft } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { useLanguage } from '../context/LanguageContext'
 
-interface ImpressumProps {
-  onClose: () => void;
+function TextBlock({ text }: { text: string }) {
+  return (
+    <>
+      {text.split('\n').map((line, i) => (
+        <span key={i}>
+          {line}
+          <br />
+        </span>
+      ))}
+    </>
+  )
 }
 
-export function Impressum({ onClose }: ImpressumProps) {
-  const { t } = useLanguage();
-  return (
-    <main className='w-full min-h-screen bg-black text-white p-24 px-4'>
-      <div className='max-w-5xl mx-auto relative'>
-        <motion.button
-          onClick={onClose}
-          className="absolute top-0 right-0 p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-        >
-          <X className="w-6 h-6" />
-        </motion.button>
-        <motion.h2
-          initial={{
-            opacity: 0,
-            y: 20,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
-          className='text-3xl font-bold mb-8 text-white'
-        >
-          {t('impressum')}
-        </motion.h2>
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: 20,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
-          transition={{
-            delay: 0.2,
-          }}
-          className='text-gray-300 leading-relaxed'
-        >
-          <h3 className='text-xl font-semibold mb-4 text-white'>
-            {t('legalNotice')}
-          </h3>
+export function Impressum() {
+  const { t } = useLanguage()
 
-          <p>
-            {t('legalNoticeText')
-              .split('\n')
-              .map((text, index) => (
-                <span key={index}>
-                  {text}
-                  <br />
-                </span>
-              ))}
-          </p>
-          <h3 className='text-xl font-semibold mt-8 mb-4 text-white'>
-            {t('liabilityForContent')}
-          </h3>
-          <p>
-            {t('liabilityForContentText')
-              .split('\n')
-              .map((text, index) => (
-                <span key={index}>
-                  {text}
-                  <br />
-                </span>
-              ))}
-          </p>
-          <h3 className='text-xl font-semibold mt-8 mb-4 text-white'>
-            {t('liabilityForLinks')}
-          </h3>
-          <p>
-            {t('liabilityForLinksText')
-              .split('\n')
-              .map((text, index) => (
-                <span key={index}>
-                  {text}
-                  <br />
-                </span>
-              ))}
-          </p>
-          <h3 className='text-xl font-semibold mt-8 mb-4 text-white'>
-            {t('copyright')}
-          </h3>
-          <p>
-            {t('copyrightText')
-              .split('\n')
-              .map((text, index) => (
-                <span key={index}>
-                  {text}
-                  <br />
-                </span>
-              ))}
-          </p>
-          <h3 className='text-xl font-semibold mt-8 mb-4 text-white'>
-            {t('dataProtection')}
-          </h3>
-          <p>
-            {t('dataProtectionText')
-              .split('\n')
-              .map((text, index) => (
-                <span key={index}>
-                  {text}
-                  <br />
-                </span>
-              ))}
-          </p>
+  const sections = [
+    { title: t.impressum.legalNoticeTitle, text: t.impressum.legalNoticeText },
+    {
+      title: t.impressum.liabilityContentTitle,
+      text: t.impressum.liabilityContentText,
+    },
+    {
+      title: t.impressum.liabilityLinksTitle,
+      text: t.impressum.liabilityLinksText,
+    },
+    { title: t.impressum.copyrightTitle, text: t.impressum.copyrightText },
+    {
+      title: t.impressum.dataProtectionTitle,
+      text: t.impressum.dataProtectionText,
+    },
+  ]
+
+  return (
+    <main className="min-h-screen bg-bg text-text px-6 py-20">
+      <div className="max-w-3xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 text-text-muted hover:text-primary transition-colors text-sm mb-12"
+          >
+            <ArrowLeft size={16} />
+            {t.nav.home}
+          </Link>
+
+          <h1 className="font-display font-black text-4xl md:text-5xl tracking-tight mb-12">
+            {t.impressum.title}
+          </h1>
+
+          <div className="space-y-10">
+            {sections.map((section, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 + i * 0.1, duration: 0.5 }}
+              >
+                <h2 className="font-display font-bold text-xl text-text mb-4">
+                  {section.title}
+                </h2>
+                <div className="text-text-muted text-sm leading-relaxed">
+                  <TextBlock text={section.text} />
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </main>
-  );
+  )
 }

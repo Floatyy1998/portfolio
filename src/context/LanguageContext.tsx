@@ -1,55 +1,39 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { getTranslation } from '../i18n';
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
+import { translations, type Translation } from '../translations'
 
 interface LanguageContextType {
-  language: string;
-  setLanguage: (lang: string) => void;
-  t: (key: string) => string;
+  lang: string
+  setLang: (lang: string) => void
+  t: Translation
 }
 
-const LanguageContext = createContext<LanguageContextType | undefined>(
-  undefined
-);
+const LanguageContext = createContext<LanguageContextType>({
+  lang: 'en',
+  setLang: () => {},
+  t: translations.en,
+})
 
-export const LanguageProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const [language, setLanguage] = useState<string>('en');
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const [lang, setLang] = useState(() => {
+    const saved = localStorage.getItem('portfolio-lang')
+    if (saved) return saved
+
+    const browserLang = navigator.language.toLowerCase()
+    if (browserLang.startsWith('de')) return 'de'
+    return 'en'
+  })
 
   useEffect(() => {
-    const fetchLocation = async () => {
-      try {
-        const response = await fetch('https://ipapi.co/json/');
-        const data = await response.json();
-        const countryCode = data.country_code;
-        if (['DE', 'AT', 'CH'].includes(countryCode)) {
-          setLanguage('de');
-        } else {
-          setLanguage('en');
-        }
-      } catch (error) {
-        console.error('Error fetching location:', error);
-      }
-    };
+    localStorage.setItem('portfolio-lang', lang)
+  }, [lang])
 
-    fetchLocation();
-  }, []);
-
-  const t = (key: string) => getTranslation(language)[key];
+  const t = translations[lang as keyof typeof translations] || translations.en
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ lang, setLang, t }}>
       {children}
     </LanguageContext.Provider>
-  );
-};
+  )
+}
 
-export const useLanguage = () => {
-  const context = useContext(LanguageContext);
-  if (context === undefined) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
-  }
-  return context;
-};
+export const useLanguage = () => useContext(LanguageContext)
