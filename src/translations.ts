@@ -11,8 +11,7 @@ const en = {
     greeting: "Hi, I'm",
     name: 'Konrad Dinges',
     roles: ['Full Stack Developer', 'Web Developer', 'Problem Solver'],
-    description:
-      'Building exceptional digital experiences with modern technologies and clean, scalable code.',
+    description: 'Building exceptional digital experiences with modern technologies and clean, scalable code.',
     cta: 'Get in Touch',
     viewProjects: 'View Projects',
     scrollToExplore: 'Scroll to explore',
@@ -28,17 +27,13 @@ const en = {
     projectsCompleted: 'Projects Completed',
     techMastered: 'Technologies Mastered',
     cleanCode: 'Clean Code',
-    cleanCodeDesc:
-      'Writing maintainable, scalable, and well-documented code that follows best practices.',
+    cleanCodeDesc: 'Writing maintainable, scalable, and well-documented code that follows best practices.',
     modernDesign: 'Modern Design',
-    modernDesignDesc:
-      'Creating beautiful, intuitive interfaces that users love to interact with.',
+    modernDesignDesc: 'Creating beautiful, intuitive interfaces that users love to interact with.',
     performance: 'Performance',
-    performanceDesc:
-      'Optimizing applications for speed and efficiency to deliver the best user experience.',
+    performanceDesc: 'Optimizing applications for speed and efficiency to deliver the best user experience.',
     userFocused: 'User-Focused',
-    userFocusedDesc:
-      'Building solutions that prioritize user needs and create value.',
+    userFocusedDesc: 'Building solutions that prioritize user needs and create value.',
   },
   skills: {
     title: 'Skills',
@@ -73,14 +68,8 @@ const en = {
         company: 'HUK-COBURG',
         period: 'Sept. 2022 — June 2025',
         location: 'Coburg, Germany',
-        description:
-          'Developing the tariff calculators for HUK Coburg, HUK24, and VRK using Angular.',
-        achievements: [
-          'Working with Angular',
-          'Working with TypeScript',
-          'CI/CD with Jenkins',
-          'AWS',
-        ],
+        description: 'Developing the tariff calculators for HUK Coburg, HUK24, and VRK using Angular.',
+        achievements: ['Working with Angular', 'Working with TypeScript', 'CI/CD with Jenkins', 'AWS'],
         tech: ['Angular', 'TypeScript', 'CI/CD', 'AWS'],
         isCurrent: false,
       },
@@ -89,8 +78,7 @@ const en = {
         company: 'KAPP NILES',
         period: 'Apr. 2020 — Jun. 2020',
         location: 'Coburg, Germany',
-        description:
-          'My task was to program a web frontend for an order picking overview.',
+        description: 'My task was to program a web frontend for an order picking overview.',
         achievements: [
           'Further development of my HTML skills',
           'Further development of my CSS skills',
@@ -105,11 +93,8 @@ const en = {
         company: 'HABA',
         period: 'Oct. 2013',
         location: 'Bad Rodach, Germany',
-        description:
-          'Learning basic programming principles and algorithms with Java.',
-        achievements: [
-          'First insights into the daily work of a software developer',
-        ],
+        description: 'Learning basic programming principles and algorithms with Java.',
+        achievements: ['First insights into the daily work of a software developer'],
         tech: ['Java'],
         isCurrent: false,
       },
@@ -139,21 +124,13 @@ const en = {
         title: 'Portfolio Website',
         description:
           'A modern portfolio website with dark mode support, smooth animations, and responsive design. Features include dynamic theme switching, animated transitions, and optimized performance.',
-        features: [
-          'Smooth Animations',
-          'Dark Mode Support',
-          'Multi-language Support',
-        ],
+        features: ['Smooth Animations', 'Dark Mode Support', 'Multi-language Support'],
       },
       {
         title: 'Classpulse',
         description:
           'Classpulse is a web application that allows teachers to collect anonymous feedback from students. The application provides an easy way to create surveys and analyze the results in real-time.',
-        features: [
-          'Real-time Analytics',
-          'Anonymous Feedback',
-          'Survey Builder',
-        ],
+        features: ['Real-time Analytics', 'Anonymous Feedback', 'Survey Builder'],
       },
       {
         title: 'DOGR',
@@ -165,8 +142,7 @@ const en = {
   },
   contact: {
     title: "Let's work together",
-    description:
-      'Have a question or want to work together? Feel free to reach out!',
+    description: 'Have a question or want to work together? Feel free to reach out!',
     name: 'Name',
     namePlaceholder: 'Your Name',
     email: 'Email',
@@ -237,17 +213,13 @@ const de: typeof en = {
     projectsCompleted: 'Projekte abgeschlossen',
     techMastered: 'Beherrschte Technologien',
     cleanCode: 'Sauberer Code',
-    cleanCodeDesc:
-      'Schreiben von wartbarem, skalierbarem und gut dokumentiertem Code nach bewährten Methoden.',
+    cleanCodeDesc: 'Schreiben von wartbarem, skalierbarem und gut dokumentiertem Code nach bewährten Methoden.',
     modernDesign: 'Modernes Design',
-    modernDesignDesc:
-      'Gestaltung schöner, intuitiver Schnittstellen, mit denen Benutzer gerne interagieren.',
+    modernDesignDesc: 'Gestaltung schöner, intuitiver Schnittstellen, mit denen Benutzer gerne interagieren.',
     performance: 'Leistung',
-    performanceDesc:
-      'Optimierung von Anwendungen für Geschwindigkeit und Effizienz für die beste Benutzererfahrung.',
+    performanceDesc: 'Optimierung von Anwendungen für Geschwindigkeit und Effizienz für die beste Benutzererfahrung.',
     userFocused: 'Benutzerorientiert',
-    userFocusedDesc:
-      'Entwicklung von Lösungen, die Benutzerbedürfnisse priorisieren und Mehrwert schaffen.',
+    userFocusedDesc: 'Entwicklung von Lösungen, die Benutzerbedürfnisse priorisieren und Mehrwert schaffen.',
   },
   skills: {
     title: 'Fähigkeiten',
@@ -282,14 +254,8 @@ const de: typeof en = {
         company: 'HUK-COBURG',
         period: 'Sept. 2022 — Juni 2025',
         location: 'Coburg, Deutschland',
-        description:
-          'Entwicklung der Tarifrechner für HUK Coburg, HUK24 und VRK mit Angular.',
-        achievements: [
-          'Umgang mit Angular',
-          'Umgang mit TypeScript',
-          'CI/CD mit Jenkins',
-          'AWS',
-        ],
+        description: 'Entwicklung der Tarifrechner für HUK Coburg, HUK24 und VRK mit Angular.',
+        achievements: ['Umgang mit Angular', 'Umgang mit TypeScript', 'CI/CD mit Jenkins', 'AWS'],
         tech: ['Angular', 'TypeScript', 'CI/CD', 'AWS'],
         isCurrent: false,
       },
@@ -298,8 +264,7 @@ const de: typeof en = {
         company: 'KAPP NILES',
         period: 'Apr. 2020 — Jun. 2020',
         location: 'Coburg, Deutschland',
-        description:
-          'Meine Aufgabe war die Programmierung eines Web-Frontends für eine Kommissionierungsübersicht.',
+        description: 'Meine Aufgabe war die Programmierung eines Web-Frontends für eine Kommissionierungsübersicht.',
         achievements: [
           'Weiterentwicklung meiner HTML Fähigkeiten',
           'Weiterentwicklung meiner CSS Fähigkeiten',
@@ -314,11 +279,8 @@ const de: typeof en = {
         company: 'HABA',
         period: 'Okt. 2013',
         location: 'Bad Rodach, Deutschland',
-        description:
-          'Erlernen grundlegender Programmierprinzipien und Algorithmen mit Java.',
-        achievements: [
-          'Erste Einblicke in den Berufsalltag eines Softwareentwicklers',
-        ],
+        description: 'Erlernen grundlegender Programmierprinzipien und Algorithmen mit Java.',
+        achievements: ['Erste Einblicke in den Berufsalltag eines Softwareentwicklers'],
         tech: ['Java'],
         isCurrent: false,
       },
@@ -342,31 +304,19 @@ const de: typeof en = {
         title: 'WatchRadar',
         description:
           'WatchRadar ermöglicht es Ihnen, die Verfügbarkeit von Filmen und TV-Sendungen auf verschiedenen Streaming-Diensten weltweit zu suchen.',
-        features: [
-          'Moderne Oberfläche',
-          'Cloud-Speicher',
-          'Benutzer-Authentifizierung',
-        ],
+        features: ['Moderne Oberfläche', 'Cloud-Speicher', 'Benutzer-Authentifizierung'],
       },
       {
         title: 'Portfolio-Website',
         description:
           'Eine moderne Portfolio-Website mit Unterstützung für den Dunkelmodus, flüssigen Animationen und responsivem Design. Zu den Funktionen gehören dynamisches Themenswitching, animierte Übergänge und optimierte Leistung.',
-        features: [
-          'Flüssige Animationen',
-          'Dunkelmodus-Unterstützung',
-          'Mehrsprachige Unterstützung',
-        ],
+        features: ['Flüssige Animationen', 'Dunkelmodus-Unterstützung', 'Mehrsprachige Unterstützung'],
       },
       {
         title: 'Classpulse',
         description:
           'Classpulse ist eine Webanwendung, die es Lehrern ermöglicht, anonymes Feedback von Schülern zu sammeln. Die Anwendung bietet eine einfache Möglichkeit, Umfragen zu erstellen und die Ergebnisse in Echtzeit zu analysieren.',
-        features: [
-          'Echtzeit-Analyse',
-          'Anonymes Feedback',
-          'Umfrage-Builder',
-        ],
+        features: ['Echtzeit-Analyse', 'Anonymes Feedback', 'Umfrage-Builder'],
       },
       {
         title: 'DOGR',
@@ -378,8 +328,7 @@ const de: typeof en = {
   },
   contact: {
     title: 'Lass uns zusammenarbeiten',
-    description:
-      'Haben Sie eine Frage oder möchten Sie zusammenarbeiten? Zögern Sie nicht, sich zu melden!',
+    description: 'Haben Sie eine Frage oder möchten Sie zusammenarbeiten? Zögern Sie nicht, sich zu melden!',
     name: 'Name',
     namePlaceholder: 'Ihr Name',
     email: 'E-Mail',

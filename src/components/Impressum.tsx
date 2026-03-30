@@ -39,11 +39,7 @@ export function Impressum() {
   return (
     <main className="min-h-screen bg-bg text-text px-6 py-20">
       <div className="max-w-3xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
           <Link
             to="/"
             className="inline-flex items-center gap-2 text-text-muted hover:text-primary transition-colors text-sm mb-12"
@@ -52,9 +48,7 @@ export function Impressum() {
             {t.nav.home}
           </Link>
 
-          <h1 className="font-display font-black text-4xl md:text-5xl tracking-tight mb-12">
-            {t.impressum.title}
-          </h1>
+          <h1 className="font-display font-black text-4xl md:text-5xl tracking-tight mb-12">{t.impressum.title}</h1>
 
           <div className="space-y-10">
             {sections.map((section, i) => (
@@ -64,9 +58,7 @@ export function Impressum() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 + i * 0.1, duration: 0.5 }}
               >
-                <h2 className="font-display font-bold text-xl text-text mb-4">
-                  {section.title}
-                </h2>
+                <h2 className="font-display font-bold text-xl text-text mb-4">{section.title}</h2>
                 <div className="text-text-muted text-sm leading-relaxed">
                   <TextBlock text={section.text} />
                 </div>

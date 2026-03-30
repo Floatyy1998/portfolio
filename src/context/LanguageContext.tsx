@@ -29,11 +29,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const t = translations[lang as keyof typeof translations] || translations.en
 
-  return (
-    <LanguageContext.Provider value={{ lang, setLang, t }}>
-      {children}
-    </LanguageContext.Provider>
-  )
+  return <LanguageContext.Provider value={{ lang, setLang, t }}>{children}</LanguageContext.Provider>
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useLanguage = () => useContext(LanguageContext)

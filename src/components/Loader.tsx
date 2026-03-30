@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 const bootLines = [
@@ -32,12 +32,7 @@ export function Loader({ onComplete }: { onComplete: () => void }) {
     >
       <div className="font-mono text-sm max-w-lg w-full px-8">
         {bootLines.slice(0, visible).map((line, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="leading-relaxed"
-          >
+          <motion.div key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="leading-relaxed">
             {line.ok ? (
               <span>
                 <span className="text-text-muted">{line.text.split('OK')[0]}</span>
