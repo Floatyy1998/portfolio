@@ -22,11 +22,9 @@ import Huk2 from '../assets/Huk2.svg'
 import Kapp from '../assets/Kapp.svg'
 import Haba from '../assets/Haba.png'
 
-/* ═══════════ TYPES ═══════════ */
 interface AppDef { id: string; label: string; icon: typeof User2; w: number; h: number; minW?: number; minH?: number }
 interface WinState { isOpen: boolean; minimized: boolean; maximized: boolean; z: number; x: number; y: number; w: number; h: number; preMax?: { x: number; y: number; w: number; h: number }; minTarget?: { x: number; y: number } }
 
-/* ═══════════ DATA ═══════════ */
 const appDefs: AppDef[] = [
   { id: 'about', label: 'About', icon: User2, w: 520, h: 680, minW: 400, minH: 500 },
   { id: 'skills', label: 'Skills', icon: Code2, w: 780, h: 560, minW: 400, minH: 380 },
@@ -52,7 +50,6 @@ const projectMeta = [
 const logos: Record<string, string> = { 'HUK-COBURG': Huk2, 'KAPP NILES': Kapp, HABA: Haba }
 const companyUrls: Record<string, string> = { 'HUK-COBURG': 'https://www.huk.de', 'KAPP NILES': 'https://www.kapp-niles.com', HABA: 'https://www.haba.de' }
 
-/* ═══════════ WALLPAPERS ═══════════ */
 function MatrixRain() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   useEffect(() => {
@@ -142,7 +139,6 @@ function StarfieldWP() {
         ctx.arc(sx, sy, size, 0, Math.PI * 2)
         ctx.fillStyle = `rgba(200, 220, 255, ${alpha})`
         ctx.fill()
-        // Draw a small trail
         const tx = ((s.x / (s.z + 0.01)) * cx + cx)
         const ty = ((s.y / (s.z + 0.01)) * cy + cy)
         ctx.beginPath()
@@ -159,7 +155,6 @@ function StarfieldWP() {
   return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 }
 
-/* ═══════════ WINDOW ═══════════ */
 function AppWindow({ app, state, onClose, onMinimize, onMaximize, onFocus, onResize, onMove, zoom = 100, fullHeight, children }: {
   app: AppDef; state: WinState; onClose: () => void; onMinimize: () => void; onMaximize: () => void
   onFocus: () => void; onResize: (w: number, h: number) => void; onMove: (x: number, y: number) => void
@@ -254,7 +249,6 @@ function AppWindow({ app, state, onClose, onMinimize, onMaximize, onFocus, onRes
             </div>
           )}
         </div>
-        {/* Resize handle — outside content scroll area */}
         {!state.maximized && <div onPointerDown={handleResizeStart} className="absolute bottom-1 right-1 w-5 h-5 cursor-se-resize z-30 group rounded-bl-xl">
           <svg className="absolute bottom-0.5 right-0.5 w-2.5 h-2.5 text-white/20 group-hover:text-white/50 transition-colors" viewBox="0 0 10 10">
             <line x1="10" y1="2" x2="2" y2="10" stroke="currentColor" strokeWidth="1.5"/><line x1="10" y1="6" x2="6" y2="10" stroke="currentColor" strokeWidth="1.5"/>
@@ -265,7 +259,6 @@ function AppWindow({ app, state, onClose, onMinimize, onMaximize, onFocus, onRes
   )
 }
 
-/* ═══════════ TERMINAL ═══════════ */
 function TerminalContent({ openWindow, notify }: { openWindow: (id: string) => void; notify: (text: string) => void }) {
   const [lines, setLines] = useState<string[]>(['\x1b[36m  KD OS Terminal v2.0\x1b[0m', '  Type "help" for commands.', ''])
   const [input, setInput] = useState(''); const [history, setHistory] = useState<string[]>([]); const [histIdx, setHistIdx] = useState(-1)
@@ -778,7 +771,6 @@ function TerminalContent({ openWindow, notify }: { openWindow: (id: string) => v
   )
 }
 
-/* ═══════════ SNAKE ═══════════ */
 function SnakeGame() {
   const canvasRef = useRef<HTMLCanvasElement>(null); const [score, setScore] = useState(0); const [gameOver, setGameOver] = useState(false)
   const dirRef = useRef({x:1,y:0}); const gameRef = useRef({snake:[{x:5,y:5}],food:{x:10,y:10},running:true})
@@ -802,7 +794,6 @@ function SnakeGame() {
     <div className="h-full flex flex-col items-center justify-center bg-[#0a0a14] p-4 gap-3">
       <div className="flex items-center justify-between w-[400px] max-w-full"><span className="text-primary font-mono text-sm">Score: {score}</span>{gameOver&&<button onClick={reset} className="px-4 py-1.5 rounded-lg bg-primary text-bg text-xs font-bold">Restart</button>}</div>
       <canvas ref={canvasRef} width={400} height={400} className="rounded-xl border border-white/10 max-w-full"/>
-      {/* Touch controls */}
       <div className="grid grid-cols-3 gap-1 w-32 mt-2 md:hidden">
         <div/><button onTouchStart={()=>touchDir(0,-1)} className="w-10 h-10 rounded-lg bg-surface flex items-center justify-center text-primary text-lg">↑</button><div/>
         <button onTouchStart={()=>touchDir(-1,0)} className="w-10 h-10 rounded-lg bg-surface flex items-center justify-center text-primary text-lg">←</button>
@@ -815,7 +806,6 @@ function SnakeGame() {
   )
 }
 
-/* ═══════════ NOTIFICATION ═══════════ */
 function Toast({ text, onDismiss }: { text: string; onDismiss: () => void }) {
   return (
     <motion.div initial={{opacity:0,x:80,scale:0.9}} animate={{opacity:1,x:0,scale:1}} exit={{opacity:0,x:80}}
@@ -828,7 +818,6 @@ function Toast({ text, onDismiss }: { text: string; onDismiss: () => void }) {
   )
 }
 
-/* ═══════════ MAIN ═══════════ */
 export function Desktop() {
   const { t, lang, setLang } = useLanguage()
   const desktopRef = useRef<HTMLDivElement>(null); const dockRef = useRef<HTMLDivElement>(null); const iconRefs = useRef<(HTMLButtonElement|null)[]>([])
@@ -847,7 +836,6 @@ export function Desktop() {
 
   useEffect(() => { const c=()=>setIsMobile(window.innerWidth<768); c(); window.addEventListener('resize',c); return ()=>window.removeEventListener('resize',c) }, [])
   useEffect(() => { localStorage.setItem('kd-zoom', String(zoom)) }, [zoom])
-  // Ctrl+Plus/Minus zoom
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && (e.key === '=' || e.key === '+')) { e.preventDefault(); setZoom(z => Math.min(150, z + 10)) }
@@ -860,7 +848,6 @@ export function Desktop() {
   const didInit = useRef(false)
   useEffect(() => { if (didInit.current) return; didInit.current = true; if(!isMobile){setTimeout(()=>openWindow('about'),500)}; setTimeout(()=>notify(lang==='de'?'Willkommen bei KD OS! Rechtsklick für Optionen.':'Welcome to KD OS! Right-click for options.'),1500) }, [])
 
-  // Konami code listener
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       setKonamiBuf(buf => {
@@ -876,7 +863,6 @@ export function Desktop() {
     window.addEventListener('keydown', onKey); return () => window.removeEventListener('keydown', onKey)
   }, [notify])
 
-  // Dock magnification (desktop only)
   useEffect(() => {
     if (isMobile) return
     const dock=dockRef.current; if(!dock) return
@@ -917,7 +903,6 @@ export function Desktop() {
     switch (id) {
       case 'about': return (
         <div className="h-full overflow-y-auto bg-[#0a0a18]">
-          {/* Profile header */}
           <div className="text-center pt-8 pb-5 px-6 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.06] to-transparent" />
             <div className="relative">
@@ -930,13 +915,11 @@ export function Desktop() {
               <p className="text-text-muted text-xs mt-1 flex items-center justify-center gap-1"><MapPin size={11} />{t.contact.meederGermany}</p>
             </div>
           </div>
-          {/* Action buttons */}
           <div className="flex justify-center gap-3 px-6 pb-4">
             <a href="mailto:mail@konrad-dinges.de" className="flex flex-col items-center gap-1.5 w-20 py-2.5 rounded-xl bg-surface hover:bg-surface-light transition-colors"><MailIcon size={18} className="text-primary" /><span className="text-[10px] text-text-muted">Email</span></a>
             <a href="https://github.com/Floatyy1998" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-1.5 w-20 py-2.5 rounded-xl bg-surface hover:bg-surface-light transition-colors"><GithubIcon size={18} className="text-text-muted" /><span className="text-[10px] text-text-muted">GitHub</span></a>
             <a href="https://linkedin.com/in/konrad-dinges-803098296" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-1.5 w-20 py-2.5 rounded-xl bg-surface hover:bg-surface-light transition-colors"><LinkedinIcon size={18} className="text-text-muted" /><span className="text-[10px] text-text-muted">LinkedIn</span></a>
           </div>
-          {/* Stats row */}
           <div className="grid grid-cols-3 mx-6 mb-4 rounded-2xl bg-surface overflow-hidden">
             {[{v:'3+',l:t.about.yearsExp,color:'#00e5ff'},{v:'15+',l:t.about.projectsCompleted,color:'#bf5af2'},{v:'10+',l:t.about.techMastered,color:'#ff3366'}].map((s,i)=>(
               <div key={i} className="py-3.5 text-center border-r border-white/[0.04] last:border-r-0">
@@ -945,7 +928,6 @@ export function Desktop() {
               </div>
             ))}
           </div>
-          {/* Info list */}
           <div className="px-6 pb-6">
             <div className="rounded-2xl bg-surface divide-y divide-white/[0.04] overflow-hidden">
               <div className="px-4 py-3"><p className="text-[10px] text-text-muted uppercase tracking-wider mb-1">{lang === 'de' ? 'Beruf' : 'Role'}</p><p className="text-sm text-text">{lang === 'de' ? 'Webentwickler' : 'Web Developer'} @ HUK-COBURG</p></div>
@@ -974,7 +956,6 @@ export function Desktop() {
         }
         return (
           <div className="h-full flex flex-col bg-[#0a0a18]">
-            {/* Dashboard header */}
             <div className="shrink-0 px-6 pt-5 pb-4">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-4">
@@ -988,7 +969,6 @@ export function Desktop() {
                   </div>
                 </div>
               </div>
-              {/* Category pills */}
               <div className="flex gap-2">
                 {skillsData.map(cat => (
                   <div key={cat.cat} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface text-xs">
@@ -999,7 +979,6 @@ export function Desktop() {
                 ))}
               </div>
             </div>
-            {/* Skills grid */}
             <div className="flex-1 overflow-y-auto px-6 pb-6">
               <div className="space-y-5">
                 {skillsData.map(cat => (
@@ -1031,7 +1010,6 @@ export function Desktop() {
 
       case 'experience': return (
         <div className="h-full flex flex-col bg-[#0a0a18]">
-          {/* Header bar */}
           <div className="shrink-0 px-6 pt-5 pb-4 flex items-center justify-between">
             <div>
               <p className="text-lg font-display font-bold text-text">{t.experience.title}</p>
@@ -1039,21 +1017,17 @@ export function Desktop() {
             </div>
             {t.experience.positions[0].isCurrent && <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-500/10 text-green-400 text-xs font-medium"><span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />{t.experience.current}</span>}
           </div>
-          {/* Timeline */}
           <div className="flex-1 overflow-y-auto px-6 pb-6">
             <div className="relative">
-              {/* Vertical line */}
               <div className="absolute left-[23px] top-2 bottom-2 w-[2px] bg-white/[0.04]" />
               <div className="space-y-1">
                 {t.experience.positions.map((pos, i) => (
                   <div key={i} className="relative flex gap-5 group">
-                    {/* Timeline node */}
                     <div className="shrink-0 pt-4 relative z-10">
                       <div className={`w-[48px] h-[48px] rounded-2xl flex items-center justify-center ${pos.isCurrent ? 'bg-primary/15 border border-primary/30' : 'bg-surface border border-white/[0.06]'}`}>
                         {logos[pos.company] ? <img src={logos[pos.company]} alt="" className="w-7 h-7 object-contain" /> : <Briefcase size={20} className={pos.isCurrent ? 'text-primary' : 'text-text-muted'} />}
                       </div>
                     </div>
-                    {/* Content */}
                     <div className="flex-1 py-3">
                       <div className="rounded-2xl bg-surface border border-white/[0.04] group-hover:border-white/[0.08] transition-colors p-4 relative overflow-hidden">
                         {pos.isCurrent && <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary via-accent to-secondary" />}
@@ -1080,40 +1054,32 @@ export function Desktop() {
 
       case 'projects': return (
         <div className="h-full overflow-y-auto bg-[#0a0a18]">
-          {/* Header */}
           <div className="px-6 pt-5 pb-3 flex items-center justify-between sticky top-0 bg-[#0a0a18]/90 backdrop-blur-xl z-10">
             <div>
               <p className="text-lg font-display font-bold text-text">{t.projects.title}</p>
               <p className="text-xs text-text-muted">{t.projects.items.length} {lang === 'de' ? 'Projekte' : 'projects'}</p>
             </div>
           </div>
-          {/* Project cards — stacked, large images */}
           <div className="px-5 pb-5 space-y-4">
             {t.projects.items.map((p, i) => {
               const m = projectMeta[i]
               return (
                 <div key={i} className="group rounded-2xl overflow-hidden bg-surface border border-white/[0.04] hover:border-white/[0.08] transition-all">
-                  {/* Large image */}
                   <div className="relative aspect-[16/9] overflow-hidden">
                     <img src={projectImages[i]} alt={p.title} className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700" />
                     <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-80" />
-                    {/* Overlay actions */}
                     <div className="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                       {m.url && <a href={m.url} target="_blank" rel="noopener noreferrer" className="px-3.5 py-1.5 rounded-lg bg-primary text-bg text-xs font-bold shadow-lg flex items-center gap-1.5">Live <ArrowUpRight size={11}/></a>}
                       {m.gh && <a href={m.gh} target="_blank" rel="noopener noreferrer" className="px-3.5 py-1.5 rounded-lg bg-black/60 backdrop-blur-sm text-white text-xs font-medium border border-white/10 flex items-center gap-1.5"><GithubIcon size={12}/>Code</a>}
                     </div>
-                    {/* Number badge */}
                     <div className="absolute top-3 left-3 w-8 h-8 rounded-lg bg-black/40 backdrop-blur-sm flex items-center justify-center text-white/60 text-xs font-mono border border-white/10">{String(i+1).padStart(2,'0')}</div>
                   </div>
-                  {/* Content below image */}
                   <div className="p-4">
                     <h3 className="font-display font-bold text-base text-text mb-1.5">{p.title}</h3>
                     <p className="text-text-muted text-sm leading-relaxed mb-3">{p.description}</p>
-                    {/* Features */}
                     <div className="flex flex-wrap gap-1.5 mb-3">
                       {p.features.map(f => <span key={f} className="px-2.5 py-1 text-[10px] rounded-full bg-accent/8 text-accent border border-accent/10 font-medium">{f}</span>)}
                     </div>
-                    {/* Tech + Actions */}
                     <div className="flex items-center justify-between">
                       <div className="flex flex-wrap gap-1.5">
                         {m.tech.map(tc => <span key={tc} className="px-2 py-0.5 text-[10px] font-mono rounded bg-white/[0.04] text-text-muted">{tc}</span>)}
@@ -1133,7 +1099,6 @@ export function Desktop() {
 
       case 'contact': return (
         <div className="h-full flex flex-col bg-[#0a0a18]">
-          {/* Chat header */}
           <div className="flex items-center gap-3 px-5 py-3 border-b border-white/[0.04] bg-surface/50 shrink-0">
             <img src={profileImage} className="w-9 h-9 rounded-full object-cover" />
             <div className="flex-1">
@@ -1145,9 +1110,7 @@ export function Desktop() {
               <a href="https://linkedin.com/in/konrad-dinges-803098296" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-text-muted hover:text-text transition-colors"><LinkedinIcon size={15}/></a>
             </div>
           </div>
-          {/* Chat messages */}
           <div className="flex-1 overflow-y-auto p-5 space-y-4">
-            {/* Received messages */}
             <div className="flex gap-3 max-w-[80%]">
               <img src={profileImage} className="w-7 h-7 rounded-full object-cover mt-1 shrink-0" />
               <div className="space-y-2">
@@ -1162,7 +1125,6 @@ export function Desktop() {
                 <p className="text-[10px] text-text-muted pl-1">{new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}</p>
               </div>
             </div>
-            {/* Success/Error messages */}
             {mailStatus === 'success' && (
               <div className="flex justify-end"><div className="bg-primary/10 border border-primary/20 rounded-2xl rounded-tr-sm px-4 py-3 max-w-[70%]"><p className="text-sm text-primary flex items-center gap-2"><CheckCircle size={14}/>{t.contact.success}</p></div></div>
             )}
@@ -1170,7 +1132,6 @@ export function Desktop() {
               <div className="flex justify-end"><div className="bg-red-500/10 border border-red-500/20 rounded-2xl rounded-tr-sm px-4 py-3 max-w-[70%]"><p className="text-sm text-red-400 flex items-center gap-2"><AlertCircle size={14}/>{t.contact.error}</p></div></div>
             )}
           </div>
-          {/* Chat input */}
           <form ref={formRef} onSubmit={handleMail} className="shrink-0 border-t border-white/[0.04] p-3 space-y-2 bg-surface/30">
             <div className="flex gap-2">
               <input name="user_name" required placeholder={t.contact.namePlaceholder} className="flex-1 bg-white/[0.04] border border-white/[0.06] rounded-xl px-3.5 py-2.5 text-text text-sm placeholder:text-text-muted/40 outline-none focus:border-primary/40 transition-colors" />
@@ -1192,13 +1153,10 @@ export function Desktop() {
     }
   }
 
-  /* ═══════════ MOBILE VIEW ═══════════ */
   if (isMobile) {
     return (
       <div className="h-[100dvh] w-screen overflow-hidden relative bg-bg flex flex-col">
-        {/* Wallpaper */}
         <div className="absolute inset-0">{wpIdx === 0 ? <MeshGradientWP /> : wpIdx === 1 ? <MatrixRain /> : <StarfieldWP />}</div>
-        {/* Menu bar */}
         <div className="relative z-10 h-10 flex items-center px-4 bg-bg/70 backdrop-blur-2xl border-b border-white/[0.04] shrink-0">
           <span className="font-display font-bold text-base text-primary">KD<span className="text-secondary">.</span></span>
           <div className="ml-auto flex items-center gap-4">
@@ -1207,12 +1165,10 @@ export function Desktop() {
           </div>
         </div>
 
-        {/* App content or home grid */}
         <AnimatePresence>
           {mobileApp ? (
             <motion.div key="app" initial={{y:'100%'}} animate={{y:0}} exit={{y:'100%'}} transition={{type:'spring',stiffness:300,damping:30}}
               className="absolute inset-0 z-20 flex flex-col bg-bg" style={{top:40}}>
-              {/* Header */}
               <div className="h-12 flex items-center justify-between px-4 shrink-0 border-b border-white/[0.04]">
                 <div className="flex items-center gap-2 text-text text-sm font-medium">
                   {(() => { const a=appDefs.find(x=>x.id===mobileApp); return a?<><a.icon size={16} className="text-primary"/>{labels[mobileApp]}</>:null })()}
@@ -1224,14 +1180,11 @@ export function Desktop() {
           ) : null}
         </AnimatePresence>
 
-        {/* Home screen */}
         <div className="flex-1 relative z-10 flex flex-col items-center justify-center px-6">
-          {/* Clock widget */}
           <div className="text-center mb-12">
             <p className="font-display font-black text-6xl text-text tabular-nums">{time.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</p>
             <p className="text-text-muted text-sm mt-1">{time.toLocaleDateString(lang==='de'?'de-DE':'en-US',{weekday:'long',month:'long',day:'numeric'})}</p>
           </div>
-          {/* App grid */}
           <div className="grid grid-cols-3 gap-6">
             {appDefs.map(app => (
               <button key={app.id} onClick={()=>setMobileApp(app.id)} className="flex flex-col items-center gap-2 group">
@@ -1244,26 +1197,21 @@ export function Desktop() {
           </div>
         </div>
 
-        {/* Bottom bar */}
         <div className="relative z-10 h-6 flex items-center justify-center shrink-0">
           <div className="w-32 h-1 rounded-full bg-white/20"/>
         </div>
 
-        {/* Notifications */}
         <div className="fixed top-12 right-3 z-[250] space-y-2"><AnimatePresence>{notifications.map(n=><Toast key={n.id} text={n.text} onDismiss={()=>setNotifications(ns=>ns.filter(x=>x.id!==n.id))}/>)}</AnimatePresence></div>
       </div>
     )
   }
 
-  /* ═══════════ DESKTOP VIEW ═══════════ */
   return (
     <div ref={desktopRef} className="h-screen w-screen overflow-hidden relative bg-bg select-none"
       onContextMenu={e=>{e.preventDefault();setCtxMenu({x:e.clientX,y:e.clientY})}} onClick={()=>setCtxMenu(null)}>
-      {/* Wallpaper */}
       <div className="absolute inset-0">
         {wpIdx === 0 ? <MeshGradientWP /> : wpIdx === 1 ? <MatrixRain /> : <StarfieldWP />}
       </div>
-      {/* Menu bar */}
       <div className="absolute top-0 left-0 right-0 h-11 z-[200] flex items-center px-5 bg-bg/70 backdrop-blur-2xl border-b border-white/[0.04]">
         <span className="font-display font-bold text-base text-primary cursor-default">KD<span className="text-secondary">.</span></span>
         {activeWin&&<span className="ml-3 text-xs text-text-muted font-medium">{labels[activeWin[0]]||''}</span>}
@@ -1275,7 +1223,6 @@ export function Desktop() {
           <span className="text-xs text-text-muted tabular-nums">{time.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span>
         </div>
       </div>
-      {/* Context menu */}
       <AnimatePresence>{ctxMenu&&(
         <motion.div initial={{opacity:0,scale:0.95}} animate={{opacity:1,scale:1}} exit={{opacity:0,scale:0.95}}
           className="fixed z-[300] bg-surface/95 backdrop-blur-2xl border border-white/[0.08] rounded-xl py-1.5 shadow-2xl min-w-[200px]"
@@ -1298,9 +1245,7 @@ export function Desktop() {
           <button onClick={()=>{setWindows({});setCtxMenu(null)}} className="w-full px-4 py-2.5 text-left text-sm text-text-muted hover:bg-white/[0.05] transition-colors">Close All Windows</button>
         </motion.div>
       )}</AnimatePresence>
-      {/* Notifications */}
       <div className="fixed top-11 right-4 z-[250] space-y-2"><AnimatePresence>{notifications.map(n=><Toast key={n.id} text={n.text} onDismiss={()=>setNotifications(ns=>ns.filter(x=>x.id!==n.id))}/>)}</AnimatePresence></div>
-      {/* Windows */}
       <AnimatePresence>{appDefs.map(app=>{const s=windows[app.id];if(!s?.isOpen)return null;return(
         <AppWindow key={app.id} app={{...app,label:labels[app.id]||app.label}} state={s}
           onClose={()=>closeWindow(app.id)} onMinimize={()=>minimizeWindow(app.id)} onMaximize={()=>maximizeWindow(app.id)}
@@ -1309,7 +1254,6 @@ export function Desktop() {
           fullHeight={app.id !== 'about'}>
           {renderContent(app.id)}
         </AppWindow>)})}</AnimatePresence>
-      {/* Dock */}
       <div ref={dockRef} className="absolute bottom-3 left-1/2 -translate-x-1/2 z-[200] flex items-end gap-1.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] backdrop-blur-2xl border border-white/[0.08]">
         {appDefs.map((app,i)=>{const ws=windows[app.id];const isOpen=!!ws?.isOpen;const isActive=isOpen&&!ws?.minimized;return(
           <button key={app.id} ref={el=>{iconRefs.current[i]=el}} onClick={()=>openWindow(app.id)}
