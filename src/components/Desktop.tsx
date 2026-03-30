@@ -305,7 +305,7 @@ function TerminalContent({ openWindow, notify }: { openWindow: (id: string) => v
           `                             Browser: ${browser}${browserVer ? ' '+browserVer : ''}`,
           ''); break
       }
-      case 'whoami': add(`  visitor (uid=42, gid=1337)`,`  browser: ${navigator.userAgent.split(' ').pop()}`,`  lang: ${navigator.language}`,`  platform: ${navigator.platform}`,''); break
+      case 'whoami': { const ua = navigator.userAgent; const br = ua.includes('OPR')?'Opera':ua.includes('Edg')?'Edge':ua.includes('Firefox')?'Firefox':ua.includes('Chrome')?'Chrome':ua.includes('Safari')?'Safari':'Unknown'; const os = (navigator as any).userAgentData?.platform || 'N/A'; add(`  visitor (uid=42, gid=1337)`,`  browser: ${br}`,`  lang: ${navigator.language}`,`  os: ${os}`,''); break }
       case 'hostname': add('  kd-portfolio.local',''); break
       case 'pwd': add('  /home/visitor',''); break
       case 'date': add(`  ${new Date().toString()}`,''); break
@@ -510,7 +510,6 @@ function TerminalContent({ openWindow, notify }: { openWindow: (id: string) => v
       case 'calc': {
         if (!args) { add('  Usage: calc <expression>','  Example: calc 2**10 + Math.sqrt(144)',''); break }
         try {
-          const allowed = /^[0-9+\-*/().%\s,]|Math\.\w+|PI|E|sqrt|pow|abs|floor|ceil|round|sin|cos|tan|log|random|min|max/
           if (/[a-zA-Z]/.test(args) && !args.match(/Math\.|PI|sqrt|pow|abs|floor|ceil|round|sin|cos|tan|log|random|min|max/)) { add('  Only math expressions allowed.',''); break }
           const result = new Function(`"use strict"; return (${args.replace(/Math\./g,'Math.')})`)()
           add(`  \x1b[32m= ${result}\x1b[0m`, '')
@@ -682,7 +681,7 @@ function TerminalContent({ openWindow, notify }: { openWindow: (id: string) => v
           const pattern = args === 'sos' ? [100,50,100,50,100,150,300,50,300,50,300,150,100,50,100,50,100] : [200]
           ;(navigator as any).vibrate(pattern)
           add(`  \x1b[32m📳 ${args === 'sos' ? 'SOS pattern!' : 'Buzz!'}\x1b[0m`, '  (Mobile only)', '')
-        } else { add('  Vibration API not available.', '') }
+        } else { add('  Vibration API not available.','  Requires Android + Chrome over HTTPS.','  (iOS/Safari does not support vibration)','') }
         break
       }
       case 'qr': {
@@ -829,7 +828,7 @@ export function Desktop() {
   const [wpIdx, setWpIdx] = useState(0); const wpNames = ['Mesh', 'Matrix Rain', 'Starfield']
   const [mobileApp, setMobileApp] = useState<string|null>(null)
   const [zoom, setZoom] = useState(() => { const saved = localStorage.getItem('kd-zoom'); return saved ? Number(saved) : 100 })
-  const [konamiBuf, setKonamiBuf] = useState<string[]>([])
+  const [, setKonamiBuf] = useState<string[]>([])
   const konamiSeq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a']
 
   const notify = useCallback((text: string) => { const id=Date.now(); setNotifications(n=>[...n,{id,text}]); setTimeout(()=>setNotifications(n=>n.filter(x=>x.id!==id)),5000) }, [])
@@ -885,13 +884,6 @@ export function Desktop() {
   const focusWindow = (id: string) => { const z=topZ+1; setTopZ(z); setWindows(prev=>({...prev,[id]:{...prev[id],z}})) }
   const resizeWindow = (id: string, w: number, h: number) => setWindows(prev=>({...prev,[id]:{...prev[id],w,h}}))
   const moveWindow = (id: string, x: number, y: number) => setWindows(prev=>({...prev,[id]:{...prev[id],x,y}}))
-  const getDockTarget = (id: string) => {
-    const idx = appDefs.findIndex(a => a.id === id)
-    const icon = iconRefs.current[idx]
-    if (!icon) return undefined
-    const rect = icon.getBoundingClientRect()
-    return { x: rect.left + rect.width / 2, y: rect.top }
-  }
 
   const activeWin = Object.entries(windows).filter(([,s])=>s.isOpen&&!s.minimized).sort(([,a],[,b])=>b.z-a.z)[0]
 
