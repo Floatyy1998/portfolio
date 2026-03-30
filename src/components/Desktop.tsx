@@ -1,11 +1,15 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { motion, AnimatePresence, useDragControls } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import {
-  User2, Code2, Briefcase, FolderOpen, Mail as MailIcon, Terminal,
-  Send, MapPin, GithubIcon, LinkedinIcon, Calendar, CheckCircle,
-  AlertCircle, ArrowUpRight, Gamepad2, ChevronDown, X as XIcon
-} from 'lucide-react'
+  LuUser as User2, LuCode as Code2, LuBriefcase as Briefcase,
+  LuFolderOpen as FolderOpen, LuMail as MailIcon, LuTerminal as Terminal,
+  LuSend as Send, LuMapPin as MapPin, LuCalendar as Calendar,
+  LuCircleCheck as CheckCircle, LuCircleAlert as AlertCircle,
+  LuArrowUpRight as ArrowUpRight, LuGamepad2 as Gamepad2,
+  LuX as XIcon
+} from 'react-icons/lu'
+import { FaGithub as GithubIcon, FaLinkedinIn as LinkedinIcon } from 'react-icons/fa6'
 import emailjs from '@emailjs/browser'
 import { useLanguage } from '../context/LanguageContext'
 import profileImage from '../assets/Profilbild.jpg'
@@ -20,7 +24,7 @@ import Haba from '../assets/Haba.png'
 
 /* ═══════════ TYPES ═══════════ */
 interface AppDef { id: string; label: string; icon: typeof User2; w: number; h: number; minW?: number; minH?: number }
-interface WinState { isOpen: boolean; minimized: boolean; maximized: boolean; z: number; x: number; y: number; w: number; h: number; preMax?: { x: number; y: number; w: number; h: number } }
+interface WinState { isOpen: boolean; minimized: boolean; maximized: boolean; z: number; x: number; y: number; w: number; h: number; preMax?: { x: number; y: number; w: number; h: number }; minTarget?: { x: number; y: number } }
 
 /* ═══════════ DATA ═══════════ */
 const appDefs: AppDef[] = [
@@ -33,9 +37,9 @@ const appDefs: AppDef[] = [
   { id: 'snake', label: 'Snake', icon: Gamepad2, w: 460, h: 540, minW: 420, minH: 500 },
 ]
 const skillsData = [
-  { cat: 'Frontend', color: '#00e5ff', items: [{ n: 'React', c: '#61DAFB' },{ n: 'Angular', c: '#DD0031' },{ n: 'TypeScript', c: '#3178C6' },{ n: 'JavaScript', c: '#F7DF1E' },{ n: 'Vue.js', c: '#4FC08D' },{ n: 'Next.js', c: '#fff' },{ n: 'Tailwind', c: '#06B6D4' },{ n: 'HTML/CSS', c: '#E34F26' }] },
-  { cat: 'Backend', color: '#bf5af2', items: [{ n: 'Node.js', c: '#339933' },{ n: 'Java', c: '#ED8B00' },{ n: 'Kotlin', c: '#7F52FF' },{ n: 'ASP.NET Core', c: '#512BD4' },{ n: 'Python', c: '#3776AB' },{ n: 'MongoDB', c: '#47A248' },{ n: 'PostgreSQL', c: '#4169E1' },{ n: 'Firebase', c: '#FFCA28' }] },
-  { cat: 'DevOps', color: '#ff3366', items: [{ n: 'Git', c: '#F05032' },{ n: 'Docker', c: '#2496ED' },{ n: 'AWS', c: '#FF9900' },{ n: 'Jenkins', c: '#D24939' },{ n: 'Figma', c: '#F24E1E' },{ n: 'Vite', c: '#646CFF' }] },
+  { cat: 'Frontend', color: '#00e5ff', items: [{ n: 'React', c: '#61DAFB', url: 'https://react.dev' },{ n: 'Angular', c: '#DD0031', url: 'https://angular.dev' },{ n: 'TypeScript', c: '#3178C6', url: 'https://www.typescriptlang.org' },{ n: 'JavaScript', c: '#F7DF1E', url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript' },{ n: 'Vue.js', c: '#4FC08D', url: 'https://vuejs.org' },{ n: 'Next.js', c: '#fff', url: 'https://nextjs.org' },{ n: 'Tailwind', c: '#06B6D4', url: 'https://tailwindcss.com' },{ n: 'HTML/CSS', c: '#E34F26', url: 'https://developer.mozilla.org/en-US/docs/Web/HTML' }] },
+  { cat: 'Backend', color: '#bf5af2', items: [{ n: 'Node.js', c: '#339933', url: 'https://nodejs.org' },{ n: 'Java', c: '#ED8B00', url: 'https://www.java.com' },{ n: 'Kotlin', c: '#7F52FF', url: 'https://kotlinlang.org' },{ n: 'ASP.NET Core', c: '#512BD4', url: 'https://dotnet.microsoft.com/apps/aspnet' },{ n: 'Python', c: '#3776AB', url: 'https://www.python.org' },{ n: 'MongoDB', c: '#47A248', url: 'https://www.mongodb.com' },{ n: 'PostgreSQL', c: '#4169E1', url: 'https://www.postgresql.org' },{ n: 'Firebase', c: '#FFCA28', url: 'https://firebase.google.com' }] },
+  { cat: 'DevOps', color: '#ff3366', items: [{ n: 'Git', c: '#F05032', url: 'https://git-scm.com' },{ n: 'Docker', c: '#2496ED', url: 'https://www.docker.com' },{ n: 'AWS', c: '#FF9900', url: 'https://aws.amazon.com' },{ n: 'Jenkins', c: '#D24939', url: 'https://www.jenkins.io' },{ n: 'Figma', c: '#F24E1E', url: 'https://www.figma.com' },{ n: 'Vite', c: '#646CFF', url: 'https://vite.dev' }] },
 ]
 const projectImages = [Serien, WatchRadar, PortfolioImg, Classpulse, DOGR]
 const projectMeta = [
@@ -46,6 +50,7 @@ const projectMeta = [
   { tech: ['React','Node.js','MongoDB','TS'], url: null, gh: null },
 ]
 const logos: Record<string, string> = { 'HUK-COBURG': Huk2, 'KAPP NILES': Kapp, HABA: Haba }
+const companyUrls: Record<string, string> = { 'HUK-COBURG': 'https://www.huk.de', 'KAPP NILES': 'https://www.kapp-niles.com', HABA: 'https://www.haba.de' }
 
 /* ═══════════ WALLPAPERS ═══════════ */
 function MatrixRain() {
@@ -155,28 +160,82 @@ function StarfieldWP() {
 }
 
 /* ═══════════ WINDOW ═══════════ */
-function AppWindow({ app, state, onClose, onMinimize, onMaximize, onFocus, onResize, constraintsRef, zoom = 100, fullHeight, children }: {
+function AppWindow({ app, state, onClose, onMinimize, onMaximize, onFocus, onResize, onMove, zoom = 100, fullHeight, children }: {
   app: AppDef; state: WinState; onClose: () => void; onMinimize: () => void; onMaximize: () => void
-  onFocus: () => void; onResize: (w: number, h: number) => void
-  constraintsRef: React.RefObject<HTMLDivElement | null>; zoom?: number; fullHeight?: boolean; children: React.ReactNode
+  onFocus: () => void; onResize: (w: number, h: number) => void; onMove: (x: number, y: number) => void
+  zoom?: number; fullHeight?: boolean; children: React.ReactNode
 }) {
-  const controls = useDragControls()
+  const winRef = useRef<HTMLDivElement>(null)
+  const skipTransition = useRef(false)
+  const [visuallyMinimized, setVisuallyMinimized] = useState(false)
+  useEffect(() => {
+    if (state.minimized) {
+      const t = setTimeout(() => setVisuallyMinimized(true), 350)
+      return () => clearTimeout(t)
+    } else {
+      setVisuallyMinimized(false)
+    }
+  }, [state.minimized])
+  const handleDragStart = (e: React.PointerEvent) => {
+    if (state.maximized) return; e.preventDefault()
+    const el = winRef.current; if (!el) return
+    const rect = el.getBoundingClientRect()
+    const offX = e.clientX - rect.left, offY = e.clientY - rect.top
+    const clamp = (x: number, y: number) => ({
+      x: Math.max(0, Math.min(x, window.innerWidth - w)),
+      y: Math.max(44, Math.min(y, window.innerHeight - h - 76)),
+    })
+    const onPointerMove = (ev: PointerEvent) => {
+      const c = clamp(ev.clientX - offX, ev.clientY - offY)
+      el.style.left = c.x + 'px'; el.style.top = c.y + 'px'
+    }
+    const onPointerUp = (ev: PointerEvent) => {
+      const c = clamp(ev.clientX - offX, ev.clientY - offY)
+      el.style.left = ''; el.style.top = ''
+      skipTransition.current = true
+      onMove(c.x, c.y)
+      requestAnimationFrame(() => { skipTransition.current = false })
+      requestAnimationFrame(() => { skipTransition.current = false })
+      window.removeEventListener('pointermove', onPointerMove); window.removeEventListener('pointerup', onPointerUp)
+    }
+    window.addEventListener('pointermove', onPointerMove); window.addEventListener('pointerup', onPointerUp)
+  }
   const handleResizeStart = (e: React.PointerEvent) => {
     if (state.maximized) return; e.preventDefault(); e.stopPropagation()
     const sX = e.clientX, sY = e.clientY, sW = state.w, sH = state.h
-    const onMove = (ev: PointerEvent) => onResize(Math.max(app.minW || 300, sW + ev.clientX - sX), Math.max(app.minH || 200, sH + ev.clientY - sY))
-    const onUp = () => { window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', onUp) }
-    window.addEventListener('pointermove', onMove); window.addEventListener('pointerup', onUp)
+    const onPointerMove = (ev: PointerEvent) => onResize(Math.max(app.minW || 300, sW + ev.clientX - sX), Math.max(app.minH || 200, sH + ev.clientY - sY))
+    const onPointerUp = () => { window.removeEventListener('pointermove', onPointerMove); window.removeEventListener('pointerup', onPointerUp) }
+    window.addEventListener('pointermove', onPointerMove); window.addEventListener('pointerup', onPointerUp)
   }
   const w = state.maximized ? window.innerWidth : state.w
-  const h = state.maximized ? window.innerHeight - 112 : state.h
+  const h = state.maximized ? window.innerHeight - 120 : state.h
   return (
-    <motion.div drag={!state.maximized} dragControls={controls} dragListener={false} dragMomentum={false} dragConstraints={constraintsRef} onPointerDown={onFocus}
-      className="absolute" style={{ left: state.maximized ? 0 : state.x, top: state.maximized ? 36 : state.y, width: w, height: h, zIndex: state.z }}
-      initial={{ scale: 0.9, opacity: 0, y: 40 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.9, opacity: 0, y: 30 }}
-      transition={{ type: 'spring', stiffness: 400, damping: 28 }}>
+    <motion.div ref={winRef}
+      onPointerDown={onFocus}
+      className="absolute"
+      style={{
+        zIndex: visuallyMinimized ? -1 : state.z,
+        pointerEvents: state.minimized ? 'none' : 'auto',
+      }}
+      initial={false}
+      animate={state.minimized
+        ? {
+            left: state.minTarget ? state.minTarget.x - w / 2 : state.x,
+            top: state.minTarget ? state.minTarget.y - h / 2 : state.y,
+            scale: 0.1, opacity: 0, width: w, height: h,
+            transition: { duration: 0.35, ease: [0.4, 0, 0.2, 1] }
+          }
+        : {
+            left: state.maximized ? 0 : state.x,
+            top: state.maximized ? 44 : state.y,
+            scale: 1, opacity: 1, width: w, height: h,
+            transition: skipTransition.current ? { duration: 0 } : { type: 'spring', stiffness: 300, damping: 25 }
+          }
+      }
+      exit={{ scale: 0.3, opacity: 0, transition: { duration: 0.2 } }}
+>
       <div className="w-full h-full rounded-2xl overflow-hidden flex flex-col border border-white/[0.08]" style={{ boxShadow: '0 30px 60px -15px rgba(0,0,0,0.6), 0 0 1px rgba(255,255,255,0.1)' }}>
-        <div onPointerDown={(e) => { if (!state.maximized) { e.preventDefault(); controls.start(e) } }} onDoubleClick={onMaximize}
+        <div onPointerDown={handleDragStart} onDoubleClick={onMaximize}
           className="h-12 flex items-center px-4 bg-surface-light backdrop-blur-xl cursor-grab active:cursor-grabbing select-none shrink-0 border-b border-white/[0.05]">
           <div className="flex gap-2">
             <button onClick={(e) => { e.stopPropagation(); onClose() }} className="w-3.5 h-3.5 rounded-full bg-[#ff5f57] hover:brightness-125 transition-all" />
@@ -829,10 +888,24 @@ export function Desktop() {
 
   const openWindow = (id: string) => { setWindows(prev => { const existing=prev[id]; const idx=appDefs.findIndex(a=>a.id===id); const app=appDefs[idx]; const newZ=topZ+1; setTopZ(newZ); if(existing?.isOpen&&existing.minimized) return {...prev,[id]:{...existing,minimized:false,z:newZ}}; if(existing?.isOpen) return {...prev,[id]:{...existing,z:newZ}}; return {...prev,[id]:{isOpen:true,minimized:false,maximized:false,z:newZ,x:60+idx*40,y:45+idx*35,w:app.w,h:app.h}} }) }
   const closeWindow = (id: string) => setWindows(prev=>({...prev,[id]:{...prev[id],isOpen:false,maximized:false}}))
-  const minimizeWindow = (id: string) => setWindows(prev=>({...prev,[id]:{...prev[id],minimized:true}}))
+  const minimizeWindow = (id: string) => {
+    const idx = appDefs.findIndex(a => a.id === id)
+    const icon = iconRefs.current[idx]
+    let minTarget: { x: number; y: number } | undefined
+    if (icon) { const r = icon.getBoundingClientRect(); minTarget = { x: r.left + r.width / 2, y: r.top + r.height / 2 } }
+    setWindows(prev => ({ ...prev, [id]: { ...prev[id], minimized: true, minTarget } }))
+  }
   const maximizeWindow = (id: string) => setWindows(prev=>{const s=prev[id];if(!s)return prev;if(s.maximized)return{...prev,[id]:{...s,maximized:false,...(s.preMax||{})}};return{...prev,[id]:{...s,maximized:true,preMax:{x:s.x,y:s.y,w:s.w,h:s.h}}}})
   const focusWindow = (id: string) => { const z=topZ+1; setTopZ(z); setWindows(prev=>({...prev,[id]:{...prev[id],z}})) }
   const resizeWindow = (id: string, w: number, h: number) => setWindows(prev=>({...prev,[id]:{...prev[id],w,h}}))
+  const moveWindow = (id: string, x: number, y: number) => setWindows(prev=>({...prev,[id]:{...prev[id],x,y}}))
+  const getDockTarget = (id: string) => {
+    const idx = appDefs.findIndex(a => a.id === id)
+    const icon = iconRefs.current[idx]
+    if (!icon) return undefined
+    const rect = icon.getBoundingClientRect()
+    return { x: rect.left + rect.width / 2, y: rect.top }
+  }
 
   const activeWin = Object.entries(windows).filter(([,s])=>s.isOpen&&!s.minimized).sort(([,a],[,b])=>b.z-a.z)[0]
 
@@ -938,13 +1011,13 @@ export function Desktop() {
                       {cat.items.map(s => {
                         const pct = proficiency[s.n] || 50
                         return (
-                          <div key={s.n} className="group flex items-center gap-3 px-3 py-2.5 rounded-xl bg-surface border border-white/[0.03] hover:border-white/[0.08] transition-all">
+                          <a key={s.n} href={s.url} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 px-3 py-2.5 rounded-xl bg-surface border border-white/[0.03] hover:border-white/[0.08] transition-all cursor-pointer">
                             <div className="relative shrink-0">
                               <Ring pct={pct} color={s.c} size={40} width={3} />
                               <span className="absolute inset-0 flex items-center justify-center text-[9px] font-mono text-text-muted">{pct}</span>
                             </div>
                             <span className="text-sm font-medium text-text truncate">{s.n}</span>
-                          </div>
+                          </a>
                         )
                       })}
                     </div>
@@ -988,7 +1061,7 @@ export function Desktop() {
                           <h3 className="font-display font-bold text-base text-text">{pos.title}</h3>
                           <span className="text-[11px] text-text-muted font-mono shrink-0 ml-2">{pos.period.split('—')[0].trim()}</span>
                         </div>
-                        <p className="text-text-muted text-sm mb-1">{pos.company}</p>
+                        {companyUrls[pos.company] ? <a href={companyUrls[pos.company]} target="_blank" rel="noopener noreferrer" className="text-text-muted text-sm mb-1 hover:text-primary transition-colors inline-block">{pos.company} ↗</a> : <p className="text-text-muted text-sm mb-1">{pos.company}</p>}
                         <div className="flex gap-3 text-text-muted text-[11px] mb-2">
                           <span className="flex items-center gap-1"><Calendar size={10} />{pos.period}</span>
                           <span className="flex items-center gap-1"><MapPin size={10} />{pos.location}</span>
@@ -1191,7 +1264,7 @@ export function Desktop() {
         {wpIdx === 0 ? <MeshGradientWP /> : wpIdx === 1 ? <MatrixRain /> : <StarfieldWP />}
       </div>
       {/* Menu bar */}
-      <div className="absolute top-0 left-0 right-0 h-9 z-[200] flex items-center px-5 bg-bg/70 backdrop-blur-2xl border-b border-white/[0.04]">
+      <div className="absolute top-0 left-0 right-0 h-11 z-[200] flex items-center px-5 bg-bg/70 backdrop-blur-2xl border-b border-white/[0.04]">
         <span className="font-display font-bold text-base text-primary cursor-default">KD<span className="text-secondary">.</span></span>
         {activeWin&&<span className="ml-3 text-xs text-text-muted font-medium">{labels[activeWin[0]]||''}</span>}
         <div className="ml-auto flex items-center gap-5">
@@ -1228,20 +1301,21 @@ export function Desktop() {
       {/* Notifications */}
       <div className="fixed top-11 right-4 z-[250] space-y-2"><AnimatePresence>{notifications.map(n=><Toast key={n.id} text={n.text} onDismiss={()=>setNotifications(ns=>ns.filter(x=>x.id!==n.id))}/>)}</AnimatePresence></div>
       {/* Windows */}
-      <AnimatePresence>{appDefs.map(app=>{const s=windows[app.id];if(!s?.isOpen||s.minimized)return null;return(
+      <AnimatePresence>{appDefs.map(app=>{const s=windows[app.id];if(!s?.isOpen)return null;return(
         <AppWindow key={app.id} app={{...app,label:labels[app.id]||app.label}} state={s}
           onClose={()=>closeWindow(app.id)} onMinimize={()=>minimizeWindow(app.id)} onMaximize={()=>maximizeWindow(app.id)}
-          onFocus={()=>focusWindow(app.id)} onResize={(w,h)=>resizeWindow(app.id,w,h)} constraintsRef={desktopRef} zoom={zoom}
+          onFocus={()=>focusWindow(app.id)} onResize={(w,h)=>resizeWindow(app.id,w,h)} onMove={(x,y)=>moveWindow(app.id,x,y)}
+          zoom={zoom}
           fullHeight={app.id !== 'about'}>
           {renderContent(app.id)}
         </AppWindow>)})}</AnimatePresence>
       {/* Dock */}
       <div ref={dockRef} className="absolute bottom-3 left-1/2 -translate-x-1/2 z-[200] flex items-end gap-1.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] backdrop-blur-2xl border border-white/[0.08]">
-        {appDefs.map((app,i)=>{const isOpen=windows[app.id]?.isOpen&&!windows[app.id]?.minimized;return(
+        {appDefs.map((app,i)=>{const ws=windows[app.id];const isOpen=!!ws?.isOpen;const isActive=isOpen&&!ws?.minimized;return(
           <button key={app.id} ref={el=>{iconRefs.current[i]=el}} onClick={()=>openWindow(app.id)}
             className="group relative flex flex-col items-center origin-bottom" style={{transition:'transform 0.15s cubic-bezier(0.33,1,0.68,1)'}}>
             <span className="absolute -top-10 px-3 py-1.5 rounded-lg bg-surface border border-white/[0.06] text-text text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">{labels[app.id]||app.label}</span>
-            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-colors duration-200 ${isOpen?'bg-primary/15 text-primary':'bg-surface-light/80 text-text-muted group-hover:text-text'}`}><app.icon size={24}/></div>
+            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-colors duration-200 ${isActive?'bg-primary/15 text-primary':isOpen?'bg-primary/8 text-primary/60':'bg-surface-light/80 text-text-muted group-hover:text-text'}`}><app.icon size={24}/></div>
             <div className={`w-1.5 h-1.5 rounded-full mt-1 transition-all ${isOpen?'bg-primary':'bg-transparent'}`}/>
           </button>
         )})}

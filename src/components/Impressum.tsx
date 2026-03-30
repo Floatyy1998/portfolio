@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowLeft } from 'lucide-react'
+import { LuArrowLeft as ArrowLeft } from 'react-icons/lu'
 import { Link } from 'react-router-dom'
 import { useLanguage } from '../context/LanguageContext'
 
