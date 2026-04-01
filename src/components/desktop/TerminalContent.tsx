@@ -4,10 +4,12 @@ export function TerminalContent({
   openWindow,
   notify,
   lang,
+  onShake,
 }: {
   openWindow: (id: string) => void
   notify: (text: string) => void
   lang: string
+  onShake?: () => void
 }) {
   const [lines, setLines] = useState<string[]>([
     '\x1b[36m  KD OS Terminal v2.0\x1b[0m',
@@ -418,8 +420,10 @@ export function TerminalContent({
             '  🎉 Welcome to the team!',
             '',
           )
-        else if (args.toLowerCase().includes('rm -rf'))
+        else if (args.toLowerCase().includes('rm -rf')) {
           add('  🛡️ Nice try. System protected by excellent code.', '  (Your destructive intent has been noted.)', '')
+          onShake?.()
+        }
         else if (args.toLowerCase().includes('apt') || args.toLowerCase().includes('install'))
           add(
             `  📦 Installing ${args.split(' ').pop()}...`,

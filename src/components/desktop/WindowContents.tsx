@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useCallback } from 'react'
 import {
   LuBriefcase as Briefcase,
   LuMail as MailIcon,
@@ -21,10 +21,26 @@ export function WindowContents({
   id,
   openWindow,
   notify,
+  onShake,
+  zoom,
+  setZoom,
+  wpIdx,
+  setWpIdx,
+  wpNames,
+  setLangProp,
+  langProp,
 }: {
   id: string
   openWindow: (id: string) => void
   notify: (text: string) => void
+  onShake?: () => void
+  zoom?: number
+  setZoom?: (z: number) => void
+  wpIdx?: number
+  setWpIdx?: (idx: number) => void
+  wpNames?: string[]
+  setLangProp?: (lang: string) => void
+  langProp?: string
 }) {
   const { t, lang } = useLanguage()
 
@@ -47,9 +63,23 @@ export function WindowContents({
     case 'contact':
       return <ContactContent notify={notify} />
     case 'terminal':
-      return <TerminalContent openWindow={openWindow} notify={notify} lang={lang} />
+      return <TerminalContent openWindow={openWindow} notify={notify} lang={lang} onShake={onShake} />
     case 'snake':
       return <SnakeGame />
+    case 'notes':
+      return <NotesContent />
+    case 'settings':
+      return (
+        <SettingsContent
+          zoom={zoom ?? 100}
+          setZoom={setZoom ?? (() => {})}
+          wpIdx={wpIdx ?? 0}
+          setWpIdx={setWpIdx ?? (() => {})}
+          wpNames={wpNames ?? []}
+          lang={langProp ?? lang}
+          setLang={setLangProp ?? (() => {})}
+        />
+      )
     default:
       return null
   }
@@ -529,6 +559,177 @@ function ContactContent({ notify }: { notify: (text: string) => void }) {
           </button>
         </div>
       </form>
+    </div>
+  )
+}
+
+function NotesContent() {
+  const [text, setText] = useState(() => localStorage.getItem('kd-notes') || '')
+
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const v = e.target.value
+    setText(v)
+    localStorage.setItem('kd-notes', v)
+  }, [])
+
+  return (
+    <div className="h-full flex flex-col" style={{ background: '#2a2518' }}>
+      <div className="px-4 py-2 border-b border-yellow-900/30 bg-yellow-900/10">
+        <p className="text-xs text-yellow-200/60 font-mono">Sticky Notes</p>
+      </div>
+      <textarea
+        value={text}
+        onChange={handleChange}
+        placeholder="Write your notes here..."
+        className="flex-1 w-full resize-none p-4 text-sm leading-relaxed outline-none"
+        style={{
+          background: 'transparent',
+          color: '#e8dcc8',
+          caretColor: '#fbbf24',
+        }}
+      />
+    </div>
+  )
+}
+
+function SettingsContent({
+  zoom,
+  setZoom,
+  wpIdx,
+  setWpIdx,
+  wpNames,
+  lang,
+  setLang,
+}: {
+  zoom: number
+  setZoom: (z: number) => void
+  wpIdx: number
+  setWpIdx: (idx: number) => void
+  wpNames: string[]
+  lang: string
+  setLang: (lang: string) => void
+}) {
+  const [activeSection, setActiveSection] = useState('display')
+  const sections = [
+    { id: 'display', label: lang === 'de' ? 'Anzeige' : 'Display' },
+    { id: 'wallpaper', label: lang === 'de' ? 'Hintergrund' : 'Wallpaper' },
+    { id: 'language', label: lang === 'de' ? 'Sprache' : 'Language' },
+    { id: 'about', label: lang === 'de' ? 'Info' : 'About' },
+  ]
+
+  const wpColors = ['#00e5ff', '#00ff41', '#ffffff']
+
+  return (
+    <div className="h-full flex bg-[#0a0a18]">
+      <div className="w-44 shrink-0 border-r border-white/[0.04] bg-surface/30 py-3">
+        {sections.map(s => (
+          <button
+            key={s.id}
+            onClick={() => setActiveSection(s.id)}
+            className={`w-full text-left px-4 py-2.5 text-sm transition-colors ${
+              activeSection === s.id ? 'bg-primary/10 text-primary font-medium' : 'text-text-muted hover:text-text hover:bg-white/[0.03]'
+            }`}
+          >
+            {s.label}
+          </button>
+        ))}
+      </div>
+      <div className="flex-1 overflow-y-auto p-6">
+        {activeSection === 'display' && (
+          <div>
+            <h3 className="text-lg font-display font-bold text-text mb-4">
+              {lang === 'de' ? 'Anzeige' : 'Display'}
+            </h3>
+            <div className="bg-surface rounded-2xl p-5 border border-white/[0.04]">
+              <p className="text-sm text-text-muted mb-3">Zoom</p>
+              <div className="flex items-center gap-4">
+                <span className="text-xs text-text-muted font-mono w-8">70%</span>
+                <input
+                  type="range"
+                  min={70}
+                  max={150}
+                  step={10}
+                  value={zoom}
+                  onChange={e => setZoom(Number(e.target.value))}
+                  className="flex-1 accent-[#00e5ff]"
+                />
+                <span className="text-xs text-text-muted font-mono w-10">150%</span>
+              </div>
+              <p className="text-center text-sm text-primary font-mono mt-2">{zoom}%</p>
+            </div>
+          </div>
+        )}
+        {activeSection === 'wallpaper' && (
+          <div>
+            <h3 className="text-lg font-display font-bold text-text mb-4">
+              {lang === 'de' ? 'Hintergrund' : 'Wallpaper'}
+            </h3>
+            <div className="grid grid-cols-3 gap-3">
+              {wpNames.map((name, i) => (
+                <button
+                  key={name}
+                  onClick={() => setWpIdx(i)}
+                  className={`rounded-2xl border-2 p-1 transition-all ${
+                    wpIdx === i ? 'border-primary shadow-[0_0_12px_rgba(0,229,255,0.3)]' : 'border-white/[0.06] hover:border-white/[0.12]'
+                  }`}
+                >
+                  <div
+                    className="h-20 rounded-xl flex items-center justify-center"
+                    style={{ background: `linear-gradient(135deg, ${wpColors[i]}20, ${wpColors[i]}05)` }}
+                  >
+                    <span className="text-xs text-text-muted font-medium">{name}</span>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+        {activeSection === 'language' && (
+          <div>
+            <h3 className="text-lg font-display font-bold text-text mb-4">
+              {lang === 'de' ? 'Sprache' : 'Language'}
+            </h3>
+            <div className="flex gap-3">
+              {[
+                { code: 'en', label: 'English', flag: 'EN' },
+                { code: 'de', label: 'Deutsch', flag: 'DE' },
+              ].map(l => (
+                <button
+                  key={l.code}
+                  onClick={() => setLang(l.code)}
+                  className={`flex-1 py-4 rounded-2xl border-2 transition-all text-center ${
+                    lang === l.code
+                      ? 'border-primary bg-primary/10 text-primary'
+                      : 'border-white/[0.06] text-text-muted hover:border-white/[0.12]'
+                  }`}
+                >
+                  <div className="text-2xl font-bold mb-1">{l.flag}</div>
+                  <div className="text-sm">{l.label}</div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+        {activeSection === 'about' && (
+          <div>
+            <h3 className="text-lg font-display font-bold text-text mb-4">
+              {lang === 'de' ? 'Info' : 'About'}
+            </h3>
+            <div className="bg-surface rounded-2xl p-6 border border-white/[0.04] text-center">
+              <div className="font-display font-black text-4xl text-primary mb-2">
+                KD<span className="text-secondary">.</span>
+              </div>
+              <p className="text-text font-medium">KD OS</p>
+              <p className="text-text-muted text-sm mt-1">Version 2.0</p>
+              <div className="mt-4 pt-4 border-t border-white/[0.04] text-xs text-text-muted space-y-1">
+                <p>React 19 + TypeScript + Framer Motion</p>
+                <p>by Konrad Dinges</p>
+                <p className="text-primary/60">mail@konrad-dinges.de</p>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   )
 }

@@ -6,6 +6,8 @@ import {
   LuMail as MailIcon,
   LuTerminal as Terminal,
   LuGamepad2 as Gamepad2,
+  LuStickyNote,
+  LuSettings,
 } from 'react-icons/lu'
 import type { AppDef } from '../types/desktop'
 import profileImage from '../assets/Profilbild.jpg'
@@ -28,6 +30,8 @@ export const appDefs: AppDef[] = [
   { id: 'contact', label: 'Contact', icon: MailIcon, w: 740, h: 560, minW: 420, minH: 380 },
   { id: 'terminal', label: 'Terminal', icon: Terminal, w: 750, h: 460, minW: 440, minH: 280 },
   { id: 'snake', label: 'Snake', icon: Gamepad2, w: 460, h: 540, minW: 420, minH: 500 },
+  { id: 'notes', label: 'Notes', icon: LuStickyNote, w: 400, h: 350, minW: 300, minH: 250 },
+  { id: 'settings', label: 'Settings', icon: LuSettings, w: 650, h: 500, minW: 500, minH: 400 },
 ]
 
 export const skillsData = [
